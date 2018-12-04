@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CSVParser {
-    private Path questionsFile = Paths.get("C:\\Users\\default.default-PC\\IdeaProjects\\otus-spring-course\\Homework\\homework-01\\src\\main\\resources\\questions-answers.csv");
+    private Path questionsFile = Paths.get("src\\main\\resources\\questions-answers.csv");
     private String separator = ",";
 
     public List<Question> parseFile() throws IOException {

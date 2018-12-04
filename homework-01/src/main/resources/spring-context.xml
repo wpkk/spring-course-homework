@@ -3,13 +3,21 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="questionDao" class="ru.otus.homework01.dao.QuestionDaoImpl">
 
+    <bean id="console" class="java.io.Console"/>
+
+    <bean id="questionDao" class="ru.otus.homework01.dao.QuestionDaoImpl"/>
+
+    <bean id="consoleService" class="ru.otus.homework01.service.ConsoleServiceImpl">
+            <constructor-arg ref="console"/>
     </bean>
-
-    <bean id="questionData" class="ru.otus.homework01.service.QuestionDataServiceImpl">
+    <bean id="questionService" class="ru.otus.homework01.service.QuestionServiceImpl">
         <constructor-arg ref="questionDao"/>
+        <constructor-arg ref="consoleService"/>
     </bean>
 
+    <bean id="studentService" class="ru.otus.homework01.service.StudentServiceImpl">
+        <constructor-arg ref="consoleService"/>
+    </bean>
 
 </beans>
