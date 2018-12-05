@@ -1,8 +1,10 @@
 package ru.otus.homework01.service;
 
 import ru.otus.homework01.dao.QuestionDao;
+import ru.otus.homework01.domain.Answer;
 import ru.otus.homework01.domain.Question;
 
+import java.util.Collections;
 import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService {
@@ -22,19 +24,34 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void askQuestions(List<Question> questions) {
-
-        consoleService.writeMessage("Please answer the following questions:\n");
-
+        consoleService.writeMessage("Please enter the number of the correct answer:");
         for (Question question: questions) {
-            askQuestion(question);
+            receiveAnswer(askQuestion(question));
         }
     }
 
-    public void askQuestion(Question question) {
-
-
+    private int askQuestion(Question question) {
+        int correctAnswerNumber = 0;
+        int answerCounter = 1;
+        List<Answer> answers = question.getAnswers();
+        Collections.shuffle(answers);
+        consoleService.writeMessage(question.getQuestion());
+        for (Answer answer : answers) {
+            consoleService.writeMessage(answerCounter + "." + answer.getAnswer());
+            if (answer.isCorrect()) {
+                correctAnswerNumber = answerCounter;
+            }
+            answerCounter++;
+        }
+        return correctAnswerNumber;
     }
 
+    private void receiveAnswer(int correctAnswerNumber) {
+        if (consoleService.readMessage().equals(String.valueOf(correctAnswerNumber))) {
+            consoleService.writeMessage("Correct");
+        }
+
+    }
 
 
 }

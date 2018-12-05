@@ -14,9 +14,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudentInfo() {
-        consoleService.writeMessage("Enter your name\n");
+        consoleService.writeMessage("Enter your name");
         name = consoleService.readMessage();
-        consoleService.writeMessage("Enter your surname\n");
+        consoleService.writeMessage("Enter your surname");
         surname = consoleService.readMessage();
         return new Student(name, surname);
     }

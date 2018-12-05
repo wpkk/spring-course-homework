@@ -6,7 +6,6 @@ import ru.otus.homework01.domain.Student;
 import ru.otus.homework01.service.QuestionService;
 import ru.otus.homework01.service.StudentService;
 
-import java.rmi.StubNotFoundException;
 import java.util.List;
 
 public class Main {
@@ -18,10 +17,11 @@ public class Main {
 
         Student x = studentService.getStudentInfo();
 
-        System.out.println(x);
+//        System.out.println(x);
 
         List<Question> questions = questionService.getQuestions();
-        System.out.println(questions.toString());
+//        System.out.println(questions.toString());
+
 
         questionService.askQuestions(questions);
 

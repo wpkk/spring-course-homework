@@ -14,6 +14,7 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Override
     public void writeMessage(String message) {
         console.printf(message);
+        console.printf("\n");
     }
 
     @Override
