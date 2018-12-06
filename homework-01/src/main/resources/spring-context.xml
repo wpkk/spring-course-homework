@@ -20,4 +20,8 @@
         <constructor-arg ref="consoleService"/>
     </bean>
 
+    <bean id="evaluationService" class="ru.otus.homework01.service.EvaluationServiceImpl">
+        <constructor-arg ref="consoleService"/>
+    </bean>
+
 </beans>

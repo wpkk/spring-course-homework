@@ -9,8 +9,8 @@ import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService {
 
-    private QuestionDao questionDao;
-    private ConsoleService consoleService;
+    private final QuestionDao questionDao;
+    private final ConsoleService consoleService;
 
     public QuestionServiceImpl(QuestionDao questionDao, ConsoleService consoleService) {
         this.questionDao = questionDao;
@@ -23,11 +23,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void askQuestions(List<Question> questions) {
+    public List<Question> askQuestions(List<Question> questions) {
         consoleService.writeMessage("Please enter the number of the correct answer:");
         for (Question question: questions) {
-            receiveAnswer(askQuestion(question));
+            question.setAnsweredCorrectly(receiveAnswer(askQuestion(question)));
         }
+        return questions;
     }
 
     private int askQuestion(Question question) {
@@ -46,11 +47,8 @@ public class QuestionServiceImpl implements QuestionService {
         return correctAnswerNumber;
     }
 
-    private void receiveAnswer(int correctAnswerNumber) {
-        if (consoleService.readMessage().equals(String.valueOf(correctAnswerNumber))) {
-            consoleService.writeMessage("Correct");
-        }
-
+    private boolean receiveAnswer(int correctAnswerNumber) {
+        return consoleService.readMessage().equals(String.valueOf(correctAnswerNumber));
     }
 
 

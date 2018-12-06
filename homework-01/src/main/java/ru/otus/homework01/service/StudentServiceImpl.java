@@ -4,9 +4,7 @@ import ru.otus.homework01.domain.Student;
 
 public class StudentServiceImpl implements StudentService {
 
-    private ConsoleService consoleService;
-    private String name;
-    private String surname;
+    private final ConsoleService consoleService;
 
     public StudentServiceImpl(ConsoleService consoleService) {
         this.consoleService = consoleService;
@@ -15,9 +13,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentInfo() {
         consoleService.writeMessage("Enter your name");
-        name = consoleService.readMessage();
+        String name = consoleService.readMessage();
         consoleService.writeMessage("Enter your surname");
-        surname = consoleService.readMessage();
+        String surname = consoleService.readMessage();
         return new Student(name, surname);
     }
 }

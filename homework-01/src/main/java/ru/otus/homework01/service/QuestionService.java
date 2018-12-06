@@ -8,6 +8,6 @@ public interface QuestionService {
 
     List<Question> getQuestions();
 
-    void askQuestions(List<Question> questions);
+    List<Question> askQuestions(List<Question> questions);
 
 }

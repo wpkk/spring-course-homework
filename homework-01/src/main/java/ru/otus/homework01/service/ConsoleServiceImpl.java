@@ -4,8 +4,7 @@ import java.io.Console;
 
 public class ConsoleServiceImpl implements ConsoleService {
 
-//    private Console console = System.console();
-    private Console console;
+    private final Console console;
 
     public ConsoleServiceImpl(Console console) {
         this.console = console;

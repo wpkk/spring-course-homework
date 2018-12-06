@@ -2,7 +2,7 @@ package ru.otus.homework01.domain;
 
 public class Answer {
 
-    private String answer;
+    private final String answer;
     private boolean isCorrect;
 
     public boolean isCorrect() {
