@@ -1,25 +1,28 @@
 package ru.otus.homework01.service;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.otus.homework01.dao.QuestionDao;
-import ru.otus.homework01.domain.Question;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
+@DisplayName("Class QuestionServiceImpl")
 public class QuestionServiceImplTest {
-
-    private ConsoleService consoleService = mock(ConsoleService.class);
-
-    private QuestionDao questionDao = mock(QuestionDao.class);
+    @Mock
+    private ConsoleService consoleService;
+    @Mock
+    private QuestionDao questionDao;
 
     @Test
+    @DisplayName("Calls dao only once")
     public void testGetQuestions() {
-        when(questionDao.getQuestions()).thenReturn(new ArrayList<>());
         QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService);
         questionService.getQuestions();
         verify(questionDao, times(1)).getQuestions();
