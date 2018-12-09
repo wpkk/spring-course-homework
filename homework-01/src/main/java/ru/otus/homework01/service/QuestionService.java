@@ -10,4 +10,7 @@ public interface QuestionService {
 
     List<Question> askQuestions(List<Question> questions);
 
+    int askQuestion(Question question);
+
+    boolean evaluateAnswer(int answerNumber);
 }

@@ -12,13 +12,13 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Class StudentServiceImpl")
-public class StudentServiceImplTest {
+class StudentServiceImplTest {
     @Mock
     private ConsoleService consoleService;
 
     @Test
     @DisplayName("Returns correct student object")
-    public void testExpectedInput() {
+    void testExpectedInput() {
         when(consoleService.readMessage()).thenReturn("name").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);
@@ -27,7 +27,7 @@ public class StudentServiceImplTest {
 
     @Test
     @DisplayName("Rejects empty name")
-    public void testEmptyName() {
+    void testEmptyName() {
         when(consoleService.readMessage()).thenReturn("").thenReturn("name").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);
@@ -36,7 +36,7 @@ public class StudentServiceImplTest {
 
     @Test
     @DisplayName("Rejects empty surname")
-    public void testEmptySurname() {
+    void testEmptySurname() {
         when(consoleService.readMessage()).thenReturn("name").thenReturn("").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);

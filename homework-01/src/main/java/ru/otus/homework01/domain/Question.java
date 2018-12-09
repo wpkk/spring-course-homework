@@ -1,5 +1,6 @@
 package ru.otus.homework01.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Question {
@@ -17,7 +18,7 @@ public class Question {
         return question;
     }
 
-    public List<Answer> getAnswers() {
+    private List<Answer> getAnswers() {
         return answers;
     }
 
@@ -31,6 +32,11 @@ public class Question {
 
     public void setAnsweredCorrectly(boolean answeredCorrectly) {
         isAnsweredCorrectly = answeredCorrectly;
+    }
+
+    public List<Answer> shuffleAnswers() {
+        Collections.shuffle(answers);
+        return getAnswers();
     }
 
     @Override

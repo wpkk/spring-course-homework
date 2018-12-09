@@ -20,7 +20,7 @@ public class CSVParser {
         try {
             questionsFile = Paths.get(getClass().getClassLoader().getResource("questions-answers.csv").toURI());
         } catch (URISyntaxException e) {
-            System.out.println("The questions-answers.csv file could not be found");;
+            System.out.println("The questions-answers.csv file could not be found");
         }
     }
 

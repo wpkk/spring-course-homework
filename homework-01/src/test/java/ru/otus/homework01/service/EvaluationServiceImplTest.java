@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Class EvaluationServiceImpl")
-public class EvaluationServiceImplTest {
+class EvaluationServiceImplTest {
     @Mock
     private ConsoleService consoleService;
     @Mock
@@ -23,7 +23,7 @@ public class EvaluationServiceImplTest {
 
     @Test
     @DisplayName("Prints correct information to console")
-    public void test() {
+    void test() {
         when(questions.size()).thenReturn(50);
 
         Student student = mock(Student.class);
