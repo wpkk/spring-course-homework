@@ -1,11 +1,13 @@
 package ru.otus.homework01.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.otus.homework01.domain.Student;
-
+@Service
 public class StudentServiceImpl implements StudentService {
 
     private final ConsoleService consoleService;
-
+    @Autowired
     public StudentServiceImpl(ConsoleService consoleService) {
         this.consoleService = consoleService;
     }

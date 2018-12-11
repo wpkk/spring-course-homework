@@ -1,7 +1,9 @@
 package ru.otus.homework01.service;
 
-import java.util.Scanner;
+import org.springframework.stereotype.Service;
 
+import java.util.Scanner;
+@Service
 public class ConsoleServiceImpl implements ConsoleService {
 
     private final Scanner scanner;
