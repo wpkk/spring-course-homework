@@ -1,23 +1,22 @@
 package ru.otus.homework01.service;
 
-import java.io.Console;
+import java.util.Scanner;
 
 public class ConsoleServiceImpl implements ConsoleService {
 
-    private final Console console;
+    private final Scanner scanner;
 
-    public ConsoleServiceImpl(Console console) {
-        this.console = console;
+    public ConsoleServiceImpl() {
+        scanner = new Scanner(System.in);
     }
 
     @Override
     public void writeMessage(String message) {
-        console.printf(message);
-        console.printf("\n");
+        System.out.println(message);
     }
 
     @Override
     public String readMessage() {
-        return console.readLine();
+        return scanner.nextLine();
     }
 }
