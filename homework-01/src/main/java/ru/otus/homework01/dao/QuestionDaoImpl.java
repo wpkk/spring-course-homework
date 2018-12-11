@@ -7,9 +7,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class QuestionDaoImpl implements QuestionDao {
-    public List<Question> getQuestions() {
-        CSVParser parser = new CSVParser();
-        List<Question> result = null;                                   //TODO optional?
+
+    private final String fileName;
+
+    public QuestionDaoImpl(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public List<Question> getQuestions()  {
+        CSVParser parser = new CSVParser(fileName);
+        List<Question> result = null;
         try {
             result = parser.parseFile();
         } catch (IOException e) {
@@ -17,4 +24,5 @@ public class QuestionDaoImpl implements QuestionDao {
         }
         return result;
     }
+
 }

@@ -2,11 +2,19 @@ package ru.otus.homework01.domain;
 
 public class Answer {
 
-    private String answer;
+    private final String answer;
     private boolean isCorrect;
+
+    public boolean isCorrect() {
+        return isCorrect;
+    }
 
     public void setCorrect(boolean correct) {
         isCorrect = correct;
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 
     public Answer(String answer) {
