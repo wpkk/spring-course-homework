@@ -18,6 +18,7 @@ public class CSVParser {
 
     public CSVParser(String fileName) {
         try {
+            System.out.println(fileName);
             questionsFile = Paths.get(getClass().getClassLoader().getResource(fileName).toURI());
         } catch (URISyntaxException e) {
             System.out.println("The " + fileName + " file could not be found");

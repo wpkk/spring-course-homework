@@ -25,7 +25,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> askQuestions(List<Question> questions) {
-        consoleService.writeMessage("Please enter the number of the correct answer:");
+        consoleService.writeLocalizedMessage("message.askQuestions");
         for (Question question: questions) {
             question.setAnsweredCorrectly(evaluateAnswer(askQuestion(question)));
         }

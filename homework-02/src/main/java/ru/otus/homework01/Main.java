@@ -10,7 +10,8 @@ import ru.otus.homework01.service.QuestionService;
 import ru.otus.homework01.service.StudentService;
 
 import java.util.List;
-@ComponentScan
+
+@ComponentScan(basePackages = "ru.otus.homework01")
 @PropertySource("classpath:application.properties")
 class Main {
 

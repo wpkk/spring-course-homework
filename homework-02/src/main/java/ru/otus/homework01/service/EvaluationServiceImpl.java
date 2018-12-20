@@ -20,8 +20,11 @@ public class EvaluationServiceImpl implements EvaluationService {
     public void evaluateStudent(Student student, List<Question> questions) {
         int totalQuestions = questions.size();
         long numberOfCorrectlyAnswered = questions.stream().filter(Question::isAnsweredCorrectly).count();
-        consoleService.writeMessage(student.getName() + " " + student.getSurname()
-                                    + ", you have correctly answered " + numberOfCorrectlyAnswered
-                                    + " questions out of " + totalQuestions);
+
+        consoleService.writeLocalizedMessage("message.evaluateStudent", new Object[]{
+                student.getName(),
+                student.getSurname(),
+                numberOfCorrectlyAnswered,
+                totalQuestions});
     }
 }

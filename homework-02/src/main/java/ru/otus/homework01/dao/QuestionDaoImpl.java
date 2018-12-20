@@ -1,6 +1,6 @@
 package ru.otus.homework01.dao;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.homework01.domain.Question;
 import ru.otus.homework01.util.CSVParser;
@@ -10,14 +10,15 @@ import java.util.List;
 @Service
 public class QuestionDaoImpl implements QuestionDao {
 
-    private final String fileName;
+    private final String questionFile;
 
-    public QuestionDaoImpl(@Value("${file.name}") String fileName) {
-        this.fileName = fileName;
+    @Autowired
+    public QuestionDaoImpl(String questionFile) {
+        this.questionFile = questionFile;
     }
 
     public List<Question> getQuestions()  {
-        CSVParser parser = new CSVParser(fileName);
+        CSVParser parser = new CSVParser(questionFile);
         List<Question> result = null;
         try {
             result = parser.parseFile();
