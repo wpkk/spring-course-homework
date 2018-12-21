@@ -1,6 +1,6 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
-import ru.otus.homework01.domain.Question;
+import ru.otus.homework02.domain.Question;
 
 import java.util.List;
 

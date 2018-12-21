@@ -1,10 +1,10 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.otus.homework01.dao.QuestionDao;
-import ru.otus.homework01.domain.Answer;
-import ru.otus.homework01.domain.Question;
+import ru.otus.homework02.dao.QuestionDao;
+import ru.otus.homework02.domain.Answer;
+import ru.otus.homework02.domain.Question;
 
 import java.util.List;
 @Service

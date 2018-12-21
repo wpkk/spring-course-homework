@@ -1,9 +1,9 @@
-package ru.otus.homework01.dao;
+package ru.otus.homework02.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.otus.homework01.domain.Question;
-import ru.otus.homework01.util.CSVParser;
+import ru.otus.homework02.domain.Question;
+import ru.otus.homework02.util.CSVParser;
 
 import java.io.IOException;
 import java.util.List;

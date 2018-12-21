@@ -1,4 +1,4 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

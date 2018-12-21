@@ -1,7 +1,7 @@
-package ru.otus.homework01.util;
+package ru.otus.homework02.util;
 
-import ru.otus.homework01.domain.Answer;
-import ru.otus.homework01.domain.Question;
+import ru.otus.homework02.domain.Answer;
+import ru.otus.homework02.domain.Question;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

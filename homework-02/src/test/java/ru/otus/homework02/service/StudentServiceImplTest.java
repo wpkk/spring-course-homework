@@ -1,11 +1,11 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.otus.homework01.domain.Student;
+import ru.otus.homework02.domain.Student;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
