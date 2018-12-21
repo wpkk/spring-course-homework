@@ -1,13 +1,13 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.otus.homework01.dao.QuestionDao;
-import ru.otus.homework01.domain.Answer;
-import ru.otus.homework01.domain.Question;
+import ru.otus.homework02.dao.QuestionDao;
+import ru.otus.homework02.domain.Answer;
+import ru.otus.homework02.domain.Question;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Java6Assertions.assertThat;

@@ -1,4 +1,4 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 public interface ConsoleService {
 

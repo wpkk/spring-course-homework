@@ -1,4 +1,4 @@
-package ru.otus.homework01.service;
+package ru.otus.homework02.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.otus.homework01.domain.Question;
-import ru.otus.homework01.domain.Student;
+import ru.otus.homework02.domain.Question;
+import ru.otus.homework02.domain.Student;
 
 import java.util.List;
 
@@ -31,7 +31,8 @@ class EvaluationServiceImplTest {
         when(student.getSurname()).thenReturn("surname");
         EvaluationService evaluationService = new EvaluationServiceImpl(consoleService);
         evaluationService.evaluateStudent(student, questions);
-        Mockito.verify(consoleService).writeMessage("name surname, you have correctly answered 0 questions out of 50");
+        Mockito.verify(consoleService).writeLocalizedMessage("message.evaluateStudent",
+                new Object[] {"name", "surname", 0L, 50});
 
     }
 
