@@ -6,7 +6,7 @@ public interface ConsoleService {
 
     void writeLocalizedMessage(String message);
 
-    void writeLocalizedMessage(String message, Object[] parameters);
+    void writeLocalizedMessage(String message, Object... parameters);
 
     String readMessage();
 }

@@ -33,7 +33,7 @@ public class ConsoleServiceImpl implements ConsoleService {
     }
 
     @Override
-    public void writeLocalizedMessage(String message, Object[] parameters) {
+    public void writeLocalizedMessage(String message, Object... parameters) {
         writeMessage(messageSource.getMessage(message, parameters, userLocale));
     }
 
