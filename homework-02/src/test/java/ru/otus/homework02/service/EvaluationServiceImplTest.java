@@ -32,7 +32,7 @@ class EvaluationServiceImplTest {
         EvaluationService evaluationService = new EvaluationServiceImpl(consoleService);
         evaluationService.evaluateStudent(student, questions);
         Mockito.verify(consoleService).writeLocalizedMessage("message.evaluateStudent",
-                new Object[] {"name", "surname", 0L, 50});
+                "name", "surname", 0L, 50);
 
     }
 

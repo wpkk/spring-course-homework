@@ -1,12 +1,10 @@
 package ru.otus.homework02.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 import java.util.Scanner;
-@Service
+
 public class ConsoleServiceImpl implements ConsoleService {
 
     private final MessageSource messageSource;
@@ -15,7 +13,6 @@ public class ConsoleServiceImpl implements ConsoleService {
 
     private final Scanner scanner;
 
-    @Autowired
     public ConsoleServiceImpl(MessageSource messageSource, Locale userLocale) {
         scanner = new Scanner(System.in);
         this.messageSource = messageSource;

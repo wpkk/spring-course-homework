@@ -5,23 +5,26 @@ import ru.otus.homework02.domain.Question;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Optional;
 public class CSVParser {
 
-    private Path questionsFile;
+    private Path questionFilePath;
 
-    public CSVParser(String fileName) {
+    public CSVParser(String questionFileName, String defaultQuestionFileName) {
         try {
-            System.out.println(fileName);
-            questionsFile = Paths.get(getClass().getClassLoader().getResource(fileName).toURI());
+            URL defaultQuestionFileURL = getClass().getClassLoader().getResource(defaultQuestionFileName);
+            URL questionFileURL = Optional.ofNullable(getClass().getClassLoader().getResource(questionFileName))
+                    .orElse(defaultQuestionFileURL);
+            questionFilePath = Paths.get(questionFileURL.toURI());
         } catch (URISyntaxException e) {
-            System.out.println("The " + fileName + " file could not be found");
+            System.out.println("The " + questionFileName + " file could not be found");
         }
     }
 
@@ -30,7 +33,7 @@ public class CSVParser {
         List<Question> questions = new ArrayList<>();
         List<String> tokens;
         Question currentQuestion;
-        List<String> lines = Files.readAllLines(questionsFile);
+        List<String> lines = Files.readAllLines(questionFilePath);
         List<Answer> answers;
         for (String line : lines) {
             answers = new ArrayList<>();
