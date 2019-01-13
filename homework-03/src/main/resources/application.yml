@@ -2,6 +2,3 @@ file:
   name:
     default: questions-answers.csv
     template: questions-answers%s.csv
-
-files: questions-answers%s.csv
-filed: questions-answers.csv
