@@ -2,9 +2,8 @@ package ru.otus.homework03.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.homework03.dao.QuestionDao;
 import ru.otus.homework03.domain.Answer;
 import ru.otus.homework03.domain.Question;
@@ -17,7 +16,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 @DisplayName("Class QuestionServiceImpl")
 class QuestionServiceImplTest {
     @Mock
