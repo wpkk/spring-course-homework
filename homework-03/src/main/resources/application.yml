@@ -1,4 +1,4 @@
 file:
   name:
-    default: questions-answers.csv
+    base: questions-answers.csv
     template: questions-answers%s.csv

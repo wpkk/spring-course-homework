@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.homework03.domain.Question;
 import ru.otus.homework03.domain.Student;
 
@@ -13,7 +14,8 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
 @DisplayName("Class EvaluationServiceImpl")
 class EvaluationServiceImplTest {
     @Mock

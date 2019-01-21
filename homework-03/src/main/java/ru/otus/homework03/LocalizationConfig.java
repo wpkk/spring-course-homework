@@ -1,5 +1,6 @@
 package ru.otus.homework03;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,12 @@ import java.util.Locale;
 @Configuration
 public class LocalizationConfig {
 
+    private AppProperties properties;
+
+    public LocalizationConfig(AppProperties properties) {
+        this.properties = properties;
+    }
+
     private MessageSource messageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("classpath:/i18n/bundle");
@@ -18,8 +25,8 @@ public class LocalizationConfig {
         return ms;
     }
 
-    public static String getLocalizedQuestionFile(String fileNameTemplate) {
-        return String.format(fileNameTemplate, "-" + System.getProperty("user.language"));
+    public String getLocalizedQuestionFile() {
+        return String.format(properties.getTemplate(), "-" + System.getProperty("user.language"));
     }
 
     private Locale userLocale() {

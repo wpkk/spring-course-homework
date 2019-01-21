@@ -2,10 +2,12 @@ package ru.otus.homework03;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import ru.otus.homework03.service.ExaminationService;
 
-@SpringBootApplication()
+@SpringBootApplication
+@EnableConfigurationProperties(AppProperties.class)
 public class Main {
 
     public static void main(String[] args) {
