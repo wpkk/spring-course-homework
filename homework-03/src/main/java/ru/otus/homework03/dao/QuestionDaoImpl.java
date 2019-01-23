@@ -1,6 +1,5 @@
 package ru.otus.homework03.dao;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.otus.homework03.LocalizationConfig;
 import ru.otus.homework03.domain.Question;
@@ -11,17 +10,15 @@ import java.util.List;
 @Service
 public class QuestionDaoImpl implements QuestionDao {
 
-    private final String questionFile;
 
-    @Value("${file.name.default}")
-    private String defaultQuestionFileName;
+    private LocalizationConfig config;
 
-    public QuestionDaoImpl(@Value("${file.name.template}") String questionFile) {
-        this.questionFile = LocalizationConfig.getLocalizedQuestionFile(questionFile);
+    public QuestionDaoImpl(LocalizationConfig config) {
+        this.config = config;
     }
 
     public List<Question> getQuestions()  {
-        CSVParser parser = new CSVParser(questionFile, defaultQuestionFileName);
+        CSVParser parser = new CSVParser(config.getLocalizedQuestionFileName(), config.getDefaultQuestionFileName());
         List<Question> result = null;
         try {
             result = parser.parseFile();

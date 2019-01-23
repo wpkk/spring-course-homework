@@ -11,6 +11,12 @@ import java.util.Locale;
 @Configuration
 public class LocalizationConfig {
 
+    private AppProperties properties;
+
+    public LocalizationConfig(AppProperties properties) {
+        this.properties = properties;
+    }
+
     private MessageSource messageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
         ms.setBasename("classpath:/i18n/bundle");
@@ -18,8 +24,12 @@ public class LocalizationConfig {
         return ms;
     }
 
-    public static String getLocalizedQuestionFile(String fileNameTemplate) {
-        return String.format(fileNameTemplate, "-" + System.getProperty("user.language"));
+    public String getLocalizedQuestionFileName() {
+        return String.format(properties.getTemplate(), "-" + System.getProperty("user.language"));
+    }
+
+    public String getDefaultQuestionFileName() {
+        return properties.getBase();
     }
 
     private Locale userLocale() {
