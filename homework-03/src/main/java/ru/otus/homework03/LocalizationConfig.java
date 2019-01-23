@@ -1,6 +1,5 @@
 package ru.otus.homework03;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +24,12 @@ public class LocalizationConfig {
         return ms;
     }
 
-    public String getLocalizedQuestionFile() {
+    public String getLocalizedQuestionFileName() {
         return String.format(properties.getTemplate(), "-" + System.getProperty("user.language"));
+    }
+
+    public String getDefaultQuestionFileName() {
+        return properties.getBase();
     }
 
     private Locale userLocale() {
