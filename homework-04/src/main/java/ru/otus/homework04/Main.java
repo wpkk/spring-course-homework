@@ -11,9 +11,7 @@ import ru.otus.homework04.service.ExaminationService;
 public class Main {
 
     public static void main(String[] args) {
-
-        ApplicationContext context = SpringApplication.run(Main.class, args);
-        context.getBean(ExaminationService.class).startExamination();
+        SpringApplication.run(Main.class, args);
 
     }
 
