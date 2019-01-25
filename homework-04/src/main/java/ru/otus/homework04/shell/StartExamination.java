@@ -16,7 +16,7 @@ public class StartExamination {
     }
 
     @ShellMethod("Starts the examination")
-    public void start() {
+    public void startExamination() {
         examinationService.startExamination();
     }
 }
