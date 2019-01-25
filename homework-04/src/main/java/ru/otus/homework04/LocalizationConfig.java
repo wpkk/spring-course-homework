@@ -12,9 +12,11 @@ import java.util.Locale;
 public class LocalizationConfig {
 
     private AppProperties properties;
+    private Locale userLocale;
 
     public LocalizationConfig(AppProperties properties) {
         this.properties = properties;
+        this.userLocale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
     }
 
     private MessageSource messageSource() {
@@ -25,19 +27,24 @@ public class LocalizationConfig {
     }
 
     public String getLocalizedQuestionFileName() {
-        return String.format(properties.getTemplate(), "-" + System.getProperty("user.language"));
+        return String.format(properties.getTemplate(), "-" + userLocale.getLanguage());
     }
 
     public String getDefaultQuestionFileName() {
         return properties.getBase();
     }
 
-    private Locale userLocale() {
-        return new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+    public void setUserLocale(Locale userLocale) {
+        this.userLocale = userLocale;
+        System.setProperty("user.language", userLocale.getLanguage());
+        System.setProperty("user.country", userLocale.getCountry());
     }
+//    private Locale userLocale() {
+//        return new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+//    }
 
     @Bean
     public ConsoleServiceImpl consoleService() {
-        return new ConsoleServiceImpl(messageSource(), userLocale());
+        return new ConsoleServiceImpl(messageSource(), userLocale);
     }
 }
