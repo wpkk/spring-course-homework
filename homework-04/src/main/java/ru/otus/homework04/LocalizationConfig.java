@@ -39,9 +39,6 @@ public class LocalizationConfig {
         System.setProperty("user.language", userLocale.getLanguage());
         System.setProperty("user.country", userLocale.getCountry());
     }
-//    private Locale userLocale() {
-//        return new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-//    }
 
     @Bean
     public ConsoleServiceImpl consoleService() {
