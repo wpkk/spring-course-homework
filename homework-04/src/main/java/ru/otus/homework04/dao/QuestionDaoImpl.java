@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class QuestionDaoImpl implements QuestionDao {
 
-
     private LocalizationConfig config;
 
     public QuestionDaoImpl(LocalizationConfig config) {
