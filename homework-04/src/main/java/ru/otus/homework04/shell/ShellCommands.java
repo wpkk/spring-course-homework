@@ -22,13 +22,13 @@ public class ShellCommands {
         this.examinationService = examinationService;
     }
 
-    @ShellMethod("Sets the user locale")
+    @ShellMethod("Set the user locale")
     public void setLocale(@ShellOption({"-l", "--language-code"}) String languageCode,
                           @ShellOption({"-c", "--country-code"}) String countryCode) {
         localizationConfig.setUserLocale(new Locale(languageCode, countryCode));
     }
 
-    @ShellMethod("Starts the examination")
+    @ShellMethod(value = "Start the examination", key = {"start", "start-examination"})
     public void startExamination() {
         examinationService.startExamination();
     }
