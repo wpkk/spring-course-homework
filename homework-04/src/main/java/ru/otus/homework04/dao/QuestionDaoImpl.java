@@ -1,5 +1,7 @@
 package ru.otus.homework04.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.otus.homework04.LocalizationConfig;
 import ru.otus.homework04.domain.Question;
@@ -7,8 +9,11 @@ import ru.otus.homework04.util.CSVParser;
 
 import java.io.IOException;
 import java.util.List;
+
 @Service
 public class QuestionDaoImpl implements QuestionDao {
+
+    private static final Logger log = LoggerFactory.getLogger(QuestionDaoImpl.class);
 
     private LocalizationConfig config;
 
@@ -22,7 +27,7 @@ public class QuestionDaoImpl implements QuestionDao {
         try {
             result = parser.parseFile();
         } catch (IOException e) {
-            System.out.println("Exception occurred while parsing the file");
+            log.error("Exception occurred while parsing the file");
         }
         return result;
     }

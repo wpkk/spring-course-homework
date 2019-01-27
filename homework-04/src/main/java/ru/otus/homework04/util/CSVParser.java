@@ -1,5 +1,7 @@
 package ru.otus.homework04.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.otus.homework04.domain.Answer;
 import ru.otus.homework04.domain.Question;
 
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 public class CSVParser {
 
+    private static final Logger log = LoggerFactory.getLogger(CSVParser.class);
+
     private Path questionFilePath;
 
     public CSVParser(String questionFileName, String defaultQuestionFileName) {
@@ -24,7 +28,7 @@ public class CSVParser {
                     .orElse(defaultQuestionFileURL);
             questionFilePath = Paths.get(questionFileURL.toURI());
         } catch (URISyntaxException e) {
-            System.out.println("The " + questionFileName + " file could not be found");
+            log.error("The {} file could not be found", questionFileName);
         }
     }
 
