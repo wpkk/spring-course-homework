@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.homework04.LocalizationConfig;
+import ru.otus.homework04.LocalizationProps;
 import ru.otus.homework04.service.ExaminationService;
 
 import java.util.Locale;
@@ -13,19 +14,19 @@ import java.util.Locale;
 @ShellComponent
 public class ShellCommands {
 
-    private LocalizationConfig localizationConfig;
+    private LocalizationProps localizationProps;
     private ExaminationService examinationService;
 
     @Autowired
-    public ShellCommands(LocalizationConfig localizationConfig, ExaminationService examinationService) {
-        this.localizationConfig = localizationConfig;
+    public ShellCommands(LocalizationProps localizationProps, ExaminationService examinationService) {
+        this.localizationProps = localizationProps;
         this.examinationService = examinationService;
     }
 
     @ShellMethod("Set the user locale")
     public void setLocale(@ShellOption({"-l", "--language-code"}) String languageCode,
                           @ShellOption({"-c", "--country-code"}) String countryCode) {
-        localizationConfig.setUserLocale(new Locale(languageCode, countryCode));
+        localizationProps.setUserLocale(new Locale(languageCode, countryCode));
     }
 
     @ShellMethod(value = "Start the examination", key = {"start", "start-examination"})

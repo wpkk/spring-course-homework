@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.otus.homework04.LocalizationConfig;
+import ru.otus.homework04.LocalizationProps;
 import ru.otus.homework04.domain.Question;
 import ru.otus.homework04.util.CSVParser;
 
@@ -15,9 +16,9 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private static final Logger log = LoggerFactory.getLogger(QuestionDaoImpl.class);
 
-    private LocalizationConfig config;
+    private LocalizationProps config;
 
-    public QuestionDaoImpl(LocalizationConfig config) {
+    public QuestionDaoImpl(LocalizationProps config) {
         this.config = config;
     }
 
