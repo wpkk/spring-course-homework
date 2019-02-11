@@ -17,6 +17,8 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private AppProperties props;
 
+    private List<Question> answeredQuestions;
+
     public QuestionDaoImpl(AppProperties props) {
         this.props = props;
     }
@@ -32,4 +34,13 @@ public class QuestionDaoImpl implements QuestionDao {
         return result;
     }
 
+    @Override
+    public void setAnsweredQuestions(List<Question> answeredQuestions) {
+        this.answeredQuestions = answeredQuestions;
+    }
+
+    @Override
+    public List<Question> getAnsweredQuestions() {
+        return answeredQuestions;
+    }
 }

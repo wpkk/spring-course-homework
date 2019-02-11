@@ -8,4 +8,8 @@ public interface QuestionDao {
 
     List<Question> getQuestions ();
 
+    void setAnsweredQuestions(List<Question> answeredQuestions);
+
+    List<Question> getAnsweredQuestions();
+
 }

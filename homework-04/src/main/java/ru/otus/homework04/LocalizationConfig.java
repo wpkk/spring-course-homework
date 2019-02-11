@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import ru.otus.homework04.service.ConsoleService;
 import ru.otus.homework04.service.ConsoleServiceImpl;
 
 @Configuration
@@ -25,7 +26,7 @@ public class LocalizationConfig {
     }
 
     @Bean
-    public ConsoleServiceImpl consoleService() {
+    public ConsoleService consoleService() {
         return new ConsoleServiceImpl(messageSource(), props.getUserLocale());
     }
 }

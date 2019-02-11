@@ -21,7 +21,8 @@ class StudentServiceImplTest {
         when(consoleService.readMessage()).thenReturn("name").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);
-        assertEquals(new Student("name", "surname"), studentService.getStudentInfo());
+        studentService.getStudentInfo();
+        assertEquals(new Student("name", "surname"), studentService.getStudent());
     }
 
     @Test
@@ -30,7 +31,8 @@ class StudentServiceImplTest {
         when(consoleService.readMessage()).thenReturn("").thenReturn("name").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);
-        assertNotEquals(new Student("", "surname"), studentService.getStudentInfo());
+        studentService.getStudentInfo();
+        assertNotEquals(new Student("", "surname"), studentService.getStudent());
     }
 
     @Test
@@ -39,7 +41,8 @@ class StudentServiceImplTest {
         when(consoleService.readMessage()).thenReturn("name").thenReturn("").thenReturn("surname");
 
         StudentService studentService = new StudentServiceImpl(consoleService);
-        assertNotEquals(new Student("name", ""), studentService.getStudentInfo());
+        studentService.getStudentInfo();
+        assertNotEquals(new Student("name", ""), studentService.getStudent());
     }
 
 }

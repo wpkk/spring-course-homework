@@ -18,6 +18,10 @@ class EvaluationServiceImplTest {
     @Mock
     private ConsoleService consoleService;
     @Mock
+    private StudentService studentService;
+    @Mock
+    private QuestionService questionService;
+    @Mock
     private List<Question> questions;
 
     @Test
@@ -28,7 +32,7 @@ class EvaluationServiceImplTest {
         Student student = mock(Student.class);
         when(student.getName()).thenReturn("name");
         when(student.getSurname()).thenReturn("surname");
-        EvaluationService evaluationService = new EvaluationServiceImpl(consoleService);
+        EvaluationService evaluationService = new EvaluationServiceImpl(consoleService, studentService, questionService);
         evaluationService.evaluateStudent(student, questions);
         Mockito.verify(consoleService).writeLocalizedMessage("message.evaluateStudent",
                 "name", "surname", 0L, 50);

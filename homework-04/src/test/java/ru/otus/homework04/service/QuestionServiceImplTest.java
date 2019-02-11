@@ -31,14 +31,6 @@ class QuestionServiceImplTest {
     private Question question;
 
     @Test
-    @DisplayName("Method getQuestions() calls dao only once")
-    void testGetQuestions() {
-        QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService);
-        questionService.getQuestions();
-        verify(questionDao, times(1)).getQuestions();
-    }
-
-    @Test
     @DisplayName("Method askQuestions correctly sets fields of questions")
     void testAskQuestions() {
         QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService) {
@@ -53,7 +45,9 @@ class QuestionServiceImplTest {
 
         List<Question> questions = Arrays.asList(question, question);
 
-        questionService.askQuestions(questions);
+        when(questionDao.getQuestions()).thenReturn(questions);
+
+        questionService.askQuestions();
         verify(question, times(2)).setAnsweredCorrectly(true);
         assertThat(question).hasFieldOrPropertyWithValue("isAnsweredCorrectly", true);
     }

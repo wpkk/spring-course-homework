@@ -11,9 +11,14 @@ import java.util.List;
 public class EvaluationServiceImpl implements EvaluationService {
 
     private final ConsoleService consoleService;
+    private final StudentService studentService;
+    private final QuestionService questionService;
+
     @Autowired
-    EvaluationServiceImpl(ConsoleService consoleService) {
+    EvaluationServiceImpl(ConsoleService consoleService, StudentService studentService, QuestionService questionService) {
         this.consoleService = consoleService;
+        this.studentService = studentService;
+        this.questionService = questionService;
     }
 
     @Override
@@ -26,5 +31,10 @@ public class EvaluationServiceImpl implements EvaluationService {
                 student.getSurname(),
                 numberOfCorrectlyAnswered,
                 totalQuestions);
+    }
+
+    @Override
+    public void evaluateLastStudent() {
+        evaluateStudent(studentService.getStudent(), questionService.getAnsweredQuestions());
     }
 }

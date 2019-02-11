@@ -8,6 +8,7 @@ import ru.otus.homework04.domain.Student;
 public class StudentServiceImpl implements StudentService {
 
     private final ConsoleService consoleService;
+    private Student student;
 
     @Autowired
     public StudentServiceImpl(ConsoleService consoleService) {
@@ -15,7 +16,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getStudentInfo() {
+    public void getStudentInfo() {
         consoleService.writeLocalizedMessage("message.enterName");
         String name = consoleService.readMessage();
         while (name.equals("")) {
@@ -28,6 +29,11 @@ public class StudentServiceImpl implements StudentService {
             consoleService.writeLocalizedMessage("message.emptySurname");
             surname = consoleService.readMessage();
         }
-        return new Student(name, surname);
+        this.student = new Student(name, surname);
+    }
+
+    @Override
+    public Student getStudent() {
+        return student;
     }
 }
