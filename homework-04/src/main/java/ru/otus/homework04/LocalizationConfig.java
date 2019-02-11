@@ -7,13 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import ru.otus.homework04.service.ConsoleServiceImpl;
 
-import java.util.Locale;
-
 @Configuration
 public class LocalizationConfig {
 
+    private AppProperties props;
+
     @Autowired
-    private LocalizationProps localizationProps;
+    public LocalizationConfig(AppProperties props) {
+        this.props = props;
+    }
 
     private MessageSource messageSource() {
         ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
@@ -24,6 +26,6 @@ public class LocalizationConfig {
 
     @Bean
     public ConsoleServiceImpl consoleService() {
-        return new ConsoleServiceImpl(messageSource(), localizationProps.getUserLocale());
+        return new ConsoleServiceImpl(messageSource(), props.getUserLocale());
     }
 }
