@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.shell.Shell;
-import ru.otus.homework04.LocalizationConfig;
+import ru.otus.homework04.AppProperties;
 import ru.otus.homework04.service.*;
 
 import java.util.Locale;
@@ -24,8 +23,8 @@ class ShellCommandsTest {
     @MockBean
     ExaminationService examinationService;
 
-    @SpyBean
-    LocalizationConfig localizationConfig;
+    @MockBean
+    AppProperties props;
 
     private void setLocale(String languageCode, String countryCode) {
         shell.evaluate(() -> String.format("set-locale --language-code %s --country-code %s", languageCode, countryCode));
@@ -39,7 +38,7 @@ class ShellCommandsTest {
         String countryCode = "US";
 
         setLocale(languageCode, countryCode);
-        verify(localizationConfig).setUserLocale(new Locale(languageCode, countryCode));
+        verify(props).setUserLocale(new Locale(languageCode, countryCode));
     }
 
     @Test
