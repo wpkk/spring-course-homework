@@ -1,7 +1,6 @@
 package ru.otus.homework04.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import ru.otus.homework04.domain.Answer;
 import ru.otus.homework04.domain.Question;
 
@@ -15,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-public class CSVParser {
 
-    private static final Logger log = LoggerFactory.getLogger(CSVParser.class);
+@Slf4j
+public class CSVParser {
 
     private Path questionFilePath;
 
@@ -51,7 +50,6 @@ public class CSVParser {
             currentQuestion.setAnswers(answers);
             questions.add(currentQuestion);
         }
-
         return questions;
     }
 

@@ -1,5 +1,6 @@
 package ru.otus.homework04.service;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.homework04.domain.Student;
@@ -8,6 +9,7 @@ import ru.otus.homework04.domain.Student;
 public class StudentServiceImpl implements StudentService {
 
     private final ConsoleService consoleService;
+    @Getter
     private Student student;
 
     @Autowired
@@ -32,8 +34,4 @@ public class StudentServiceImpl implements StudentService {
         this.student = new Student(name, surname);
     }
 
-    @Override
-    public Student getStudent() {
-        return student;
-    }
 }
