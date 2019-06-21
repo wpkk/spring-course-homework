@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import ru.otus.homework04.domain.Answer;
 import ru.otus.homework04.domain.Question;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -22,12 +23,14 @@ public class CSVParser {
 
     public CSVParser(String questionFileName, String defaultQuestionFileName) {
         try {
-            URL defaultQuestionFileURL = getClass().getClassLoader().getResource(defaultQuestionFileName);
+            URL defaultQuestionFileURL = Optional.ofNullable(getClass().getClassLoader().getResource(defaultQuestionFileName))
+                    .orElseThrow(() -> new FileNotFoundException("Default question file was not found"));
             URL questionFileURL = Optional.ofNullable(getClass().getClassLoader().getResource(questionFileName))
                     .orElse(defaultQuestionFileURL);
             questionFilePath = Paths.get(questionFileURL.toURI());
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException| FileNotFoundException e) {
             log.error("The {} file could not be found", questionFileName);
+            throw new RuntimeException(e);
         }
     }
 
