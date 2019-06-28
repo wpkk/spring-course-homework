@@ -11,7 +11,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     private final QuestionService questionService;
 
     @Autowired
-    public ExaminationServiceImpl(StudentService studentService, QuestionService questionService, EvaluationService evaluationService) {
+    public ExaminationServiceImpl(StudentService studentService, QuestionService questionService) {
         this.studentService = studentService;
         this.questionService = questionService;
     }

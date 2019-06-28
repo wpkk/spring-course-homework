@@ -3,7 +3,9 @@ package ru.otus.homework04.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.homework04.dao.QuestionDao;
 import ru.otus.homework04.domain.Answer;
 import ru.otus.homework04.domain.Question;
@@ -19,10 +21,12 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @DisplayName("Class QuestionServiceImpl")
 class QuestionServiceImplTest {
-    @Mock
+    @MockBean
     private ConsoleService consoleService;
-    @Mock
+    @MockBean
     private QuestionDao questionDao;
+    @Autowired
+    private QuestionService questionService;
     @Mock
     private Answer correctAnswer;
     @Mock
@@ -32,14 +36,16 @@ class QuestionServiceImplTest {
 
     @Test
     @DisplayName("Method askQuestions correctly sets fields of questions")
-    void testAskQuestions() {
-        QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService) {
+        void testAskQuestions() {
+//        QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService) {
+//
+//            @Override
+//            public boolean evaluateAnswer(int correctAnswerNumber) {
+//                return true;
+//            }
+//        };
 
-            @Override
-            public boolean evaluateAnswer(int correctAnswerNumber) {
-                return true;
-            }
-        };
+        when(questionService.evaluateAnswer(anyInt())).thenReturn(true);
 
         doCallRealMethod().when(question).setAnsweredCorrectly(anyBoolean());
 
@@ -59,7 +65,7 @@ class QuestionServiceImplTest {
         when(incorrectAnswer.isCorrect()).thenReturn(false);
         List<Answer> answers = Arrays.asList(incorrectAnswer, incorrectAnswer, correctAnswer);
         when(question.shuffleAnswers()).thenReturn(answers);
-        QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService);
+//        QuestionService questionService = new QuestionServiceImpl(questionDao, consoleService);
         assertEquals(3, questionService.askQuestion(question));
     }
 
@@ -68,7 +74,7 @@ class QuestionServiceImplTest {
     void  testEvaluateAnswer()
     {
         when(consoleService.readMessage()).thenReturn("5");
-        QuestionServiceImpl questionService = new QuestionServiceImpl(questionDao, consoleService);
+//        QuestionServiceImpl questionService = new QuestionServiceImpl(questionDao, consoleService);
         assertTrue(questionService.evaluateAnswer(5));
     }
 
