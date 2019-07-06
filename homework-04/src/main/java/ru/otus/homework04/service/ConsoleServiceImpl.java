@@ -1,22 +1,22 @@
 package ru.otus.homework04.service;
 
 import org.springframework.context.MessageSource;
+import ru.otus.homework04.AppProperties;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleServiceImpl implements ConsoleService {
 
     private final MessageSource messageSource;
 
-    private final Locale userLocale;
-
     private final Scanner scanner;
 
-    public ConsoleServiceImpl(MessageSource messageSource, Locale userLocale) {
+    private final AppProperties props;
+
+    public ConsoleServiceImpl(MessageSource messageSource, AppProperties props) {
         scanner = new Scanner(System.in);
         this.messageSource = messageSource;
-        this.userLocale = userLocale;
+        this.props = props;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 
     @Override
     public void writeLocalizedMessage(String message, Object... parameters) {
-        writeMessage(messageSource.getMessage(message, parameters, userLocale));
+        writeMessage(messageSource.getMessage(message, parameters, props.getUserLocale()));
     }
 
     @Override

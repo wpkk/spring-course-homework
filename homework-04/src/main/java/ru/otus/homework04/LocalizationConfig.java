@@ -27,6 +27,6 @@ public class LocalizationConfig {
 
     @Bean
     public ConsoleService consoleService() {
-        return new ConsoleServiceImpl(messageSource(), props.getUserLocale());
+        return new ConsoleServiceImpl(messageSource(), props);
     }
 }
