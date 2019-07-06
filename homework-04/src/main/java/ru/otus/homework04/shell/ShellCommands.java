@@ -7,6 +7,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.homework04.AppProperties;
+import ru.otus.homework04.service.ConsoleService;
 import ru.otus.homework04.service.EvaluationService;
 import ru.otus.homework04.service.ExaminationService;
 
@@ -54,10 +55,16 @@ public class ShellCommands {
 
 @ShellComponent
 class Quit implements org.springframework.shell.standard.commands.Quit.Command {
+    private ConsoleService consoleService;
+
+    @Autowired
+    public Quit(ConsoleService consoleService) {
+        this.consoleService = consoleService;
+    }
 
     @ShellMethod(value = "Exit the shell", key = {"quit", "exit"})
     public void quit() {
-        System.out.println("Thank you for using the examination application!");
+        consoleService.writeLocalizedMessage("message.quit");
         throw new ExitRequest();
     }
 
