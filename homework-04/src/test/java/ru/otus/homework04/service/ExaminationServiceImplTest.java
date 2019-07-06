@@ -12,13 +12,10 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 @DisplayName("Class ExaminationServiceImpl")
 class ExaminationServiceImplTest {
-
     @MockBean
     QuestionService questionService;
-
     @MockBean
     StudentService studentService;
-
     @Autowired
     ExaminationService examinationService;
 

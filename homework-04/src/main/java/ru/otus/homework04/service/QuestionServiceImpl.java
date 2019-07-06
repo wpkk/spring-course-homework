@@ -39,6 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
             consoleService.writeMessage(answerCounter + "." + answer.getAnswer());
             if (answer.isCorrect()) {
                 correctAnswerNumber = answerCounter;
+                break;
             }
             answerCounter++;
         }

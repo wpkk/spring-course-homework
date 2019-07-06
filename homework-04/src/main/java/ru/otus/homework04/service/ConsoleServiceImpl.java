@@ -39,6 +39,4 @@ public class ConsoleServiceImpl implements ConsoleService {
         return scanner.nextLine();
     }
 
-
-
 }
