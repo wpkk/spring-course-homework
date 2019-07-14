@@ -2,3 +2,8 @@ file:
   name:
     base: questions-answers.csv
     template: questions-answers%s.csv
+
+spring:
+  messages:
+    basename: i18n/bundle
+    encoding: UTF-8
