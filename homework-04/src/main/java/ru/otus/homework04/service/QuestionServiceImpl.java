@@ -12,6 +12,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDao questionDao;
     private final ConsoleService consoleService;
+    private static final String MESSAGE_ASK_QUESTIONS = "message.askQuestions";
 
    @Autowired
     public QuestionServiceImpl(QuestionDao questionDao, ConsoleService consoleService) {
@@ -22,7 +23,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void askQuestions() {
         List<Question> questions = questionDao.getQuestions();
-        consoleService.writeLocalizedMessage("message.askQuestions");
+        consoleService.writeLocalizedMessage(MESSAGE_ASK_QUESTIONS);
         for (Question question: questions) {
             question.setAnsweredCorrectly(evaluateAnswer(askQuestion(question)));
         }

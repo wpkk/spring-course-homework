@@ -56,6 +56,7 @@ public class ShellCommands {
 @ShellComponent
 class Quit implements org.springframework.shell.standard.commands.Quit.Command {
     private ConsoleService consoleService;
+    private static final String MESSAGE_QUIT = "message.quit";
 
     @Autowired
     public Quit(ConsoleService consoleService) {
@@ -64,7 +65,7 @@ class Quit implements org.springframework.shell.standard.commands.Quit.Command {
 
     @ShellMethod(value = "Exit the shell", key = {"quit", "exit"})
     public void quit() {
-        consoleService.writeLocalizedMessage("message.quit");
+        consoleService.writeLocalizedMessage(MESSAGE_QUIT);
         throw new ExitRequest();
     }
 

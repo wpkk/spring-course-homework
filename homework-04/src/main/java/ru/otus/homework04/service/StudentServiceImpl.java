@@ -11,6 +11,10 @@ public class StudentServiceImpl implements StudentService {
     private final ConsoleService consoleService;
     @Getter
     private Student student;
+    private static final String MESSAGE_ENTER_NAME = "message.enterName";
+    private static final String MESSAGE_EMPTY_NAME = "message.emptyName";
+    private static final String MESSAGE_ENTER_SURNAME = "message.enterSurname";
+    private static final String MESSAGE_EMPTY_SURNAME = "message.emptySurname";
 
     @Autowired
     public StudentServiceImpl(ConsoleService consoleService) {
@@ -19,16 +23,16 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void getStudentInfo() {
-        consoleService.writeLocalizedMessage("message.enterName");
+        consoleService.writeLocalizedMessage(MESSAGE_ENTER_NAME);
         String name = consoleService.readMessage();
         while (name.equals("")) {
-            consoleService.writeLocalizedMessage("message.emptyName");
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_NAME);
             name = consoleService.readMessage();
         }
-        consoleService.writeLocalizedMessage("message.enterSurname");
+        consoleService.writeLocalizedMessage(MESSAGE_ENTER_SURNAME);
         String surname = consoleService.readMessage();
         while (surname.equals("")) {
-            consoleService.writeLocalizedMessage("message.emptySurname");
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_SURNAME);
             surname = consoleService.readMessage();
         }
         this.student = new Student(name, surname);

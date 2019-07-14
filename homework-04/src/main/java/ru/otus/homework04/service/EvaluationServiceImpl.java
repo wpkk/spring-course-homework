@@ -13,6 +13,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     private final ConsoleService consoleService;
     private final StudentService studentService;
     private final QuestionService questionService;
+    private static final String MESSAGE_EVALUATE_STUDENT = "message.evaluateStudent";
 
     @Autowired
     EvaluationServiceImpl(ConsoleService consoleService, StudentService studentService, QuestionService questionService) {
@@ -26,7 +27,7 @@ public class EvaluationServiceImpl implements EvaluationService {
         int totalQuestions = questions.size();
         long numberOfCorrectlyAnswered = questions.stream().filter(Question::isAnsweredCorrectly).count();
 
-        consoleService.writeLocalizedMessage("message.evaluateStudent",
+        consoleService.writeLocalizedMessage(MESSAGE_EVALUATE_STUDENT,
                 student.getName(),
                 student.getSurname(),
                 numberOfCorrectlyAnswered,
