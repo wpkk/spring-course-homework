@@ -11,9 +11,15 @@ import java.util.List;
 public class EvaluationServiceImpl implements EvaluationService {
 
     private final ConsoleService consoleService;
+    private final StudentService studentService;
+    private final QuestionService questionService;
+    private static final String MESSAGE_EVALUATE_STUDENT = "message.evaluateStudent";
+
     @Autowired
-    EvaluationServiceImpl(ConsoleService consoleService) {
+    EvaluationServiceImpl(ConsoleService consoleService, StudentService studentService, QuestionService questionService) {
         this.consoleService = consoleService;
+        this.studentService = studentService;
+        this.questionService = questionService;
     }
 
     @Override
@@ -21,10 +27,15 @@ public class EvaluationServiceImpl implements EvaluationService {
         int totalQuestions = questions.size();
         long numberOfCorrectlyAnswered = questions.stream().filter(Question::isAnsweredCorrectly).count();
 
-        consoleService.writeLocalizedMessage("message.evaluateStudent",
+        consoleService.writeLocalizedMessage(MESSAGE_EVALUATE_STUDENT,
                 student.getName(),
                 student.getSurname(),
                 numberOfCorrectlyAnswered,
                 totalQuestions);
+    }
+
+    @Override
+    public void evaluateLastStudent() {
+        evaluateStudent(studentService.getStudent(), questionService.getAnsweredQuestions());
     }
 }

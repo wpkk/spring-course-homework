@@ -12,6 +12,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDao questionDao;
     private final ConsoleService consoleService;
+    private static final String MESSAGE_ASK_QUESTIONS = "message.askQuestions";
+
    @Autowired
     public QuestionServiceImpl(QuestionDao questionDao, ConsoleService consoleService) {
         this.questionDao = questionDao;
@@ -19,17 +21,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Question> getQuestions() {
-        return questionDao.getQuestions();
-    }
-
-    @Override
-    public List<Question> askQuestions(List<Question> questions) {
-        consoleService.writeLocalizedMessage("message.askQuestions");
+    public void askQuestions() {
+        List<Question> questions = questionDao.getQuestions();
+        consoleService.writeLocalizedMessage(MESSAGE_ASK_QUESTIONS);
         for (Question question: questions) {
             question.setAnsweredCorrectly(evaluateAnswer(askQuestion(question)));
         }
-        return questions;
+        questionDao.setAnsweredQuestions(questions);
     }
 
     @Override
@@ -42,6 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
             consoleService.writeMessage(answerCounter + "." + answer.getAnswer());
             if (answer.isCorrect()) {
                 correctAnswerNumber = answerCounter;
+                break;
             }
             answerCounter++;
         }
@@ -53,5 +52,9 @@ public class QuestionServiceImpl implements QuestionService {
         return consoleService.readMessage().equals(String.valueOf(correctAnswerNumber));
     }
 
+    @Override
+    public List<Question> getAnsweredQuestions() {
+       return questionDao.getAnsweredQuestions();
+    }
 
 }

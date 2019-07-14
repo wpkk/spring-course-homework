@@ -9,4 +9,7 @@ public interface EvaluationService {
 
     void evaluateStudent(Student student, List<Question> questions);
 
+    void evaluateLastStudent();
+
+
 }

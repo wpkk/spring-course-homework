@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.homework04.domain.Question;
 import ru.otus.homework04.domain.Student;
 
@@ -15,8 +17,10 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 @DisplayName("Class EvaluationServiceImpl")
 class EvaluationServiceImplTest {
-    @Mock
+    @MockBean
     private ConsoleService consoleService;
+    @Autowired
+    EvaluationService evaluationService;
     @Mock
     private List<Question> questions;
 
@@ -28,7 +32,6 @@ class EvaluationServiceImplTest {
         Student student = mock(Student.class);
         when(student.getName()).thenReturn("name");
         when(student.getSurname()).thenReturn("surname");
-        EvaluationService evaluationService = new EvaluationServiceImpl(consoleService);
         evaluationService.evaluateStudent(student, questions);
         Mockito.verify(consoleService).writeLocalizedMessage("message.evaluateStudent",
                 "name", "surname", 0L, 50);

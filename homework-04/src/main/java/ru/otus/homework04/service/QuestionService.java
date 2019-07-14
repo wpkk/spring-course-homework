@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface QuestionService {
 
-    List<Question> getQuestions();
-
-    List<Question> askQuestions(List<Question> questions);
+    void askQuestions();
 
     int askQuestion(Question question);
 
     boolean evaluateAnswer(int answerNumber);
+
+    List<Question> getAnsweredQuestions();
 }

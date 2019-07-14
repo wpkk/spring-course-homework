@@ -1,12 +1,20 @@
 package ru.otus.homework04.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.Collections;
 import java.util.List;
 
+@ToString
 public class Question {
 
+    @Getter
     private final String question;
+    @Getter @Setter
     private boolean isAnsweredCorrectly;
+    @Getter @Setter
     private List<Answer> answers;
 
     public Question(String question) {
@@ -14,40 +22,9 @@ public class Question {
         this.isAnsweredCorrectly = false;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
-    private List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public boolean isAnsweredCorrectly() {
-        return isAnsweredCorrectly;
-    }
-
-    public void setAnsweredCorrectly(boolean answeredCorrectly) {
-        isAnsweredCorrectly = answeredCorrectly;
-    }
-
     public List<Answer> shuffleAnswers() {
         Collections.shuffle(answers);
         return getAnswers();
     }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "question='" + question + '\'' +
-                ", isAnsweredCorrectly=" + isAnsweredCorrectly +
-                ", answers=" + answers +
-                '}';
-    }
-
-
 
 }

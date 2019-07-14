@@ -1,5 +1,7 @@
 package ru.otus.homework04;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Locale;
@@ -7,27 +9,12 @@ import java.util.Locale;
 @ConfigurationProperties(prefix = "file.name")
 public class AppProperties {
 
+    @Getter @Setter
     private String base;
-
+    @Getter @Setter
     private String template;
-
+    @Getter
     private Locale userLocale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
-
-    public String getBase() {
-        return base;
-    }
-
-    public void setBase(String base) {
-        this.base = base;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
 
     public String getLocalizedQuestionFileName() {
         return String.format(getTemplate(), "-" + userLocale.getLanguage());
@@ -35,10 +22,6 @@ public class AppProperties {
 
     public String getDefaultQuestionFileName() {
         return getBase();
-    }
-
-    public Locale getUserLocale() {
-        return userLocale;
     }
 
     public void setUserLocale(Locale userLocale) {

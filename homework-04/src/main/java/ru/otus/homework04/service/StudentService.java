@@ -4,6 +4,8 @@ import ru.otus.homework04.domain.Student;
 
 public interface StudentService {
 
-    Student getStudentInfo();
+    void getStudentInfo();
+
+    Student getStudent();
 
 }

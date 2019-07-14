@@ -1,21 +1,16 @@
 package ru.otus.homework04.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
 public class Answer {
 
+    @Getter
     private final String answer;
+    @Getter @Setter
     private boolean isCorrect;
-
-    public boolean isCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
 
     public Answer(String answer) {
 
@@ -23,11 +18,4 @@ public class Answer {
         this.isCorrect = false;
     }
 
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "answer='" + answer + '\'' +
-                ", isCorrect=" + isCorrect +
-                '}';
-    }
 }

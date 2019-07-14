@@ -1,10 +1,10 @@
 package ru.otus.homework04.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import ru.otus.homework04.domain.Answer;
 import ru.otus.homework04.domain.Question;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -15,20 +15,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-public class CSVParser {
 
-    private static final Logger log = LoggerFactory.getLogger(CSVParser.class);
+@Slf4j
+public class CSVParser {
 
     private Path questionFilePath;
 
     public CSVParser(String questionFileName, String defaultQuestionFileName) {
         try {
-            URL defaultQuestionFileURL = getClass().getClassLoader().getResource(defaultQuestionFileName);
+            URL defaultQuestionFileURL = Optional.ofNullable(getClass().getClassLoader().getResource(defaultQuestionFileName))
+                    .orElseThrow(() -> new FileNotFoundException("Default question file was not found"));
             URL questionFileURL = Optional.ofNullable(getClass().getClassLoader().getResource(questionFileName))
                     .orElse(defaultQuestionFileURL);
             questionFilePath = Paths.get(questionFileURL.toURI());
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException| FileNotFoundException e) {
             log.error("The {} file could not be found", questionFileName);
+            throw new RuntimeException(e);
         }
     }
 
@@ -51,7 +53,6 @@ public class CSVParser {
             currentQuestion.setAnswers(answers);
             questions.add(currentQuestion);
         }
-
         return questions;
     }
 
