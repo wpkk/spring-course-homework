@@ -1,19 +1,20 @@
 package ru.otus.homework05.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor @ToString
-public class Book {
+@ToString
+public class Author {
     @Getter @Setter
     private int id;
     @Getter @Setter
-    private String title;
+    private String name;
     @Getter @Setter
-    private int authorId;
+    private String surname;
     @Getter @Setter
-    private int genreId;
+    private int yearOfBirth;
+    @Getter @Setter
+    private int yearOfDeath;
 
 }
