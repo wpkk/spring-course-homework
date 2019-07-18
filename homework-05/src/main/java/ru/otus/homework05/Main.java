@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.h2.tools.Console;
+import ru.otus.homework05.dao.AuthorDao;
 import ru.otus.homework05.dao.BookDao;
 import ru.otus.homework05.domain.Book;
 
@@ -13,17 +14,12 @@ public class Main {
     public static void main(String[] args) throws Exception{
         ApplicationContext context = SpringApplication.run(Main.class);
 
-        BookDao dao = context.getBean(BookDao.class);
+        BookDao bookDaoDao = context.getBean(BookDao.class);
+        AuthorDao authorDao = context.getBean(AuthorDao.class);
 
-        System.out.println(dao.getByAuthor("author1"));
+        Book book = bookDaoDao.getById(1);
 
-        System.out.println(dao.getByGenre("genre3"));
-
-        Book book = new Book(5, "Kruzka", 2, 2);
-
-        dao.insert(book);
-
-        System.out.println(dao.getAll());
+        System.out.println(authorDao.getByBook(book));
 
         Console.main(args);
     }

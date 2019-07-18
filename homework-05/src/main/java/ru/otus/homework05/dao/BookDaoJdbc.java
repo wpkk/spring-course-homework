@@ -31,7 +31,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Book getById(int id) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("id", id);
+        SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         return jdbcOperations.queryForObject("select * from books where id = :id", parameterSource, bookMapper);
     }
 
@@ -42,14 +42,14 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getByAuthor(String author) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("surname", author);
+        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", author);
         return jdbcOperations.query("select * from books where author_id in " +
                 "(select id from authors where surname = :surname)", parameterSource, bookMapper);
     }
 
     @Override
     public List<Book> getByGenre(String genre) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("genre", genre);
+        SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre);
         return jdbcOperations.query("select * from books where genre_id in " +
                 "(select id from genres where genre = :genre)", parameterSource, bookMapper);    }
 
@@ -65,7 +65,8 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public int deleteById(Book book) {
-        return 0;
+    public int deleteById(int id) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("id", id);
+        return jdbcOperations.update("delete from books where id = :id", parameterSource);
     }
 }

@@ -1,10 +1,13 @@
 package ru.otus.homework05.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
+import java.time.Year;
+
+@AllArgsConstructor @ToString
 public class Author {
     @Getter @Setter
     private int id;
@@ -13,8 +16,8 @@ public class Author {
     @Getter @Setter
     private String surname;
     @Getter @Setter
-    private int yearOfBirth;
+    private Year birth;
     @Getter @Setter
-    private int yearOfDeath;
+    private Year death;
 
 }

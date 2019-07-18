@@ -18,6 +18,6 @@ public interface BookDao {
 
     int insert(Book book);
 
-    int deleteById(Book book);
+    int deleteById(int id);
 
 }
