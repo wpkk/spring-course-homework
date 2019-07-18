@@ -11,7 +11,7 @@ import ru.otus.homework05.domain.Book;
 
 import java.util.List;
 
-@SuppressWarnings({"ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 @Repository
 public class AuthorDaoJdbc implements AuthorDao {
 

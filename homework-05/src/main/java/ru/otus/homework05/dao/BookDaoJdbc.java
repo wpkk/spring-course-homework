@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@SuppressWarnings({"ConstantConditions"})
+@SuppressWarnings("ConstantConditions")
 
 @Repository
 public class BookDaoJdbc implements BookDao {
