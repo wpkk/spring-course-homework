@@ -63,4 +63,34 @@ public class DatabaseServiceImpl implements DatabaseService {
         Book book = bookDao.getByTitle(bookTitle);
         return genreDao.getByBook(book);
     }
+
+    @Override
+    public int countBooks() {
+        return bookDao.count();
+    }
+
+    @Override
+    public int countAuthors() {
+        return authorDao.count();
+    }
+
+    @Override
+    public int countGenres() {
+        return genreDao.count();
+    }
+
+    @Override
+    public Book getBookById(int id) {
+        return bookDao.getById(id);
+    }
+
+    @Override
+    public Author getAuthorById(int id) {
+        return authorDao.getById(id);
+    }
+
+    @Override
+    public Genre getGenreById(int id) {
+        return genreDao.getById(id);
+    }
 }

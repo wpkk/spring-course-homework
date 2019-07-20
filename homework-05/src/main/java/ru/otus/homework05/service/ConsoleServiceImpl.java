@@ -2,6 +2,7 @@ package ru.otus.homework05.service;
 
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import ru.otus.homework05.AppProperties;
 
 import java.util.Scanner;
 
@@ -12,12 +13,12 @@ public class ConsoleServiceImpl implements ConsoleService {
 
     private final Scanner scanner;
 
-//    private final AppProperties props;
+    private final AppProperties props;
 
-    public ConsoleServiceImpl(MessageSource messageSource) {//, AppProperties props) {
+    public ConsoleServiceImpl(MessageSource messageSource, AppProperties props) {
         scanner = new Scanner(System.in);
         this.messageSource = messageSource;
-//        this.props = props;
+        this.props = props;
     }
 
     @Override
@@ -30,16 +31,15 @@ public class ConsoleServiceImpl implements ConsoleService {
         System.out.println(type.toString());
     }
 
-    //    @Override
-//    public void writeLocalizedMessage(String message) {
-//        writeLocalizedMessage(message, null);
-//    }
+    @Override
+    public void writeLocalizedMessage(String message) {
+        writeLocalizedMessage(message, null);
+    }
 
-//    @Override
-//    public void writeLocalizedMessage(String message, Object... parameters) {
-//        writeLocalizedMessage(message, null);
-//        writeMessage(messageSource.getMessage(message, parameters, props.getUserLocale()));
-//    }
+    @Override
+    public void writeLocalizedMessage(String message, Object... parameters) {
+        writeMessage(messageSource.getMessage(message, parameters, props.getUserLocale()));
+    }
 
     @Override
     public String readMessage() {

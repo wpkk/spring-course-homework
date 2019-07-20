@@ -1,6 +1,7 @@
 package ru.otus.homework05.service;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
@@ -13,6 +14,8 @@ public class LibraryServiceImpl implements LibraryService {
 
     private final DatabaseService databaseService;
     private final ConsoleService consoleService;
+
+    private static final String MESSAGE_COUNT_ENTITIES = "message.countEntities";
 
     @Override
     public void getAllBooks() {
@@ -59,6 +62,32 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public void getGenreByBook(String bookTitle) {
         Genre genre = databaseService.getGenreByBook(bookTitle);
+        consoleService.writeMessage(genre);
+    }
+
+    @Override
+    public void countEntities() {
+        consoleService.writeLocalizedMessage(MESSAGE_COUNT_ENTITIES,
+                databaseService.countBooks(),
+                databaseService.countAuthors(),
+                databaseService.countGenres());
+    }
+
+    @Override
+    public void getBookById(int id) {
+        Book book = databaseService.getBookById(id);
+        consoleService.writeMessage(book);
+    }
+
+    @Override
+    public void getAuthorById(int id) {
+        Author author = databaseService.getAuthorById(id);
+        consoleService.writeMessage(author);
+    }
+
+    @Override
+    public void getGenreById(int id) {
+        Genre genre = databaseService.getGenreById(id);
         consoleService.writeMessage(genre);
     }
 }

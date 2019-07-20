@@ -10,6 +10,8 @@ public interface DatabaseService {
 
     List<Book> getAllBooks();
 
+    Book getBookById(int id);
+
     Book getBookByTitle(String title);
 
     List<Book> getBooksByAuthor(String author);
@@ -18,10 +20,20 @@ public interface DatabaseService {
 
     List<Author> getAllAuthors();
 
+    Author getAuthorById(int id);
+
     Author getAuthorByBook(String bookTitle);
 
     List<Genre> getAllGenres();
 
+    Genre getGenreById(int id);
+
     Genre getGenreByBook(String bookTitle);
+
+    int countBooks();
+
+    int countAuthors();
+
+    int countGenres();
 
 }
