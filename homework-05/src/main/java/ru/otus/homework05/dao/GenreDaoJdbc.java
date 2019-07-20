@@ -1,5 +1,6 @@
 package ru.otus.homework05.dao;
 
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -12,16 +13,11 @@ import ru.otus.homework05.domain.Genre;
 import java.util.List;
 
 @SuppressWarnings("ConstantConditions")
-@Repository
+@Repository @AllArgsConstructor
 public class GenreDaoJdbc implements GenreDao {
 
     private final NamedParameterJdbcOperations jdbcOperations;
     private final GenreMapper genreMapper;
-
-    public GenreDaoJdbc(NamedParameterJdbcOperations jdbcOperations, GenreMapper genreMapper) {
-        this.jdbcOperations = jdbcOperations;
-        this.genreMapper = genreMapper;
-    }
 
     @Override
     public int count() {

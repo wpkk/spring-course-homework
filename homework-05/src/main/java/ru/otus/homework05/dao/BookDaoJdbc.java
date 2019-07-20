@@ -1,27 +1,25 @@
 package ru.otus.homework05.dao;
 
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
+import ru.otus.homework05.domain.Genre;
 
 import java.util.List;
 @SuppressWarnings("ConstantConditions")
 
-@Repository
+@Repository @AllArgsConstructor
 public class BookDaoJdbc implements BookDao {
 
     private final NamedParameterJdbcOperations jdbcOperations;
 
     private final RowMapper<Book> bookMapper;
-
-    public BookDaoJdbc(NamedParameterJdbcOperations jdbcOperations, RowMapper<Book> bookMapper) {
-        this.jdbcOperations = jdbcOperations;
-        this.bookMapper = bookMapper;
-    }
 
     @Override
     public int count() {
@@ -36,20 +34,26 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
+    public Book getByTitle(String title) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource("title", title);
+        return jdbcOperations.queryForObject("select * from books where title = :title", parameterSource, bookMapper);
+    }
+
+    @Override
     public List<Book> getAll() {
         return jdbcOperations.query("select * from books", bookMapper);
     }
 
     @Override
-    public List<Book> getByAuthor(String author) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", author);
+    public List<Book> getByAuthor(Author author) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", author.getSurname());
         return jdbcOperations.query("select * from books where author_id in " +
                 "(select id from authors where surname = :surname)", parameterSource, bookMapper);
     }
 
     @Override
-    public List<Book> getByGenre(String genre) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre);
+    public List<Book> getByGenre(Genre genre) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre.getGenre());
         return jdbcOperations.query("select * from books where genre_id in " +
                 "(select id from genres where genre = :genre)", parameterSource, bookMapper);    }
 

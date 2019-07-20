@@ -1,5 +1,6 @@
 package ru.otus.homework05.dao;
 
+import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -12,17 +13,12 @@ import ru.otus.homework05.domain.Book;
 import java.util.List;
 
 @SuppressWarnings("ConstantConditions")
-@Repository
+@Repository @AllArgsConstructor
 public class AuthorDaoJdbc implements AuthorDao {
 
     private final NamedParameterJdbcOperations jdbcOperations;
 
     private final AuthorMapper authorMapper;
-
-    public AuthorDaoJdbc(NamedParameterJdbcOperations jdbcOperations, AuthorMapper authorMapper) {
-        this.jdbcOperations = jdbcOperations;
-        this.authorMapper = authorMapper;
-    }
 
     @Override
     public int count() {
@@ -33,6 +29,12 @@ public class AuthorDaoJdbc implements AuthorDao {
     public Author getById(int id) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         return jdbcOperations.queryForObject("select * from authors where id = :id", parameterSource, authorMapper);
+    }
+
+    @Override
+    public Author getBySurname(String surname) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", surname);
+        return jdbcOperations.queryForObject("select * from authors where surname = :surname", parameterSource, authorMapper);
     }
 
     @Override
