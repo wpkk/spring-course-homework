@@ -18,6 +18,10 @@ public interface DatabaseService {
 
     List<Author> getAllAuthors();
 
+    Author getAuthorByBook(String bookTitle);
+
     List<Genre> getAllGenres();
+
+    Genre getGenreByBook(String bookTitle);
 
 }

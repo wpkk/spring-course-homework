@@ -11,6 +11,8 @@ public interface GenreDao {
 
     Genre getById(int id);
 
+    Genre getByGenre(String genre);
+
     Genre getByBook(Book book);
 
     List<Genre> getAll();

@@ -9,4 +9,12 @@ public interface LibraryService {
     void getBooksByAuthor(String author);
 
     void getBooksByGenre(String genre);
+
+    void getAllAuthors();
+
+    void getAuthorByBook(String bookTitle);
+
+    void getAllGenres();
+
+    void getGenreByBook(String bookTitle);
 }

@@ -38,17 +38,29 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
-//        Genre genre1 = genreDao.getBy
-        return null;
+        Genre genreObject = genreDao.getByGenre(genre);
+        return bookDao.getByGenre(genreObject);
     }
 
     @Override
     public List<Author> getAllAuthors() {
-        return null;
+        return authorDao.getAll();
+    }
+
+    @Override
+    public Author getAuthorByBook(String bookTitle) {
+        Book book = bookDao.getByTitle(bookTitle);
+        return authorDao.getByBook(book);
     }
 
     @Override
     public List<Genre> getAllGenres() {
-        return null;
+        return genreDao.getAll();
+    }
+
+    @Override
+    public Genre getGenreByBook(String bookTitle) {
+        Book book = bookDao.getByTitle(bookTitle);
+        return genreDao.getByBook(book);
     }
 }
