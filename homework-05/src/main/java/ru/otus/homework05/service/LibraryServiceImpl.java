@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
 import ru.otus.homework05.domain.Genre;
-
+import java.util.List;
 import java.time.Year;
 import java.util.stream.Collectors;
 
@@ -22,13 +22,13 @@ public class LibraryServiceImpl implements LibraryService {
     private static final String MESSAGE_ENTER_AUTHOR_FULLNAME = "message.enterAuthorFullname";
     private static final String MESSAGE_ENTER_AUTHOR_BIRTH_DEATH = "message.enterAuthorBirthDeath";
     private static final String MESSAGE_ENTER_GENRE = "message.enterGenre";
+    private static final String EMPTY_RESULT_SET = "message.EmptyResultSet";
 
     private static final int DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS = 1;
 
     @Override
     public void getAllBooks() {
-        String allBooks = databaseService.getAllBooks().stream().map(Book::getTitle).collect(Collectors.joining(", "));
-        consoleService.writeMessage(allBooks);
+        printBooks(databaseService.getAllBooks());
     }
 
     @Override
@@ -39,20 +39,23 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getBooksByAuthor(String author) {
-        String booksByAuthor = databaseService.getBooksByAuthor(author).stream().map(Book::getTitle).collect(Collectors.joining(", "));
-        consoleService.writeMessage(booksByAuthor);
+        printBooks(databaseService.getBooksByAuthor(author));
     }
 
     @Override
     public void getBooksByGenre(String genre) {
-        String booksByGenre = databaseService.getBooksByGenre(genre).stream().map(Book::getTitle).collect(Collectors.joining(", "));
-        consoleService.writeMessage(booksByGenre);
+        printBooks(databaseService.getBooksByGenre(genre));
     }
 
     @Override
     public void getAllAuthors() {
-        String allAuthors = databaseService.getAllAuthors().stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
-        consoleService.writeMessage(allAuthors);
+        List<Author> authors = databaseService.getAllAuthors();
+        if (!(authors).isEmpty()) {
+            String joinedAuthors = authors.stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
+            consoleService.writeMessage(joinedAuthors);
+        } else {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+        }
     }
 
     @Override
@@ -63,8 +66,13 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAllGenres() {
-        String allGenres = databaseService.getAllGenres().stream().map(Genre::getGenre).collect(Collectors.joining(", "));
-        consoleService.writeMessage(allGenres);
+        List<Genre> genres = databaseService.getAllGenres();
+        if (!(genres).isEmpty()) {
+            String joinedGenres = genres.stream().map(Genre::getGenre).collect(Collectors.joining(", "));
+            consoleService.writeMessage(joinedGenres);
+        } else {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+        }
     }
 
     @Override
@@ -130,4 +138,30 @@ public class LibraryServiceImpl implements LibraryService {
         String genre = consoleService.readMessage();
         databaseService.addGenre(new Genre(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, genre));
     }
+
+    @Override
+    public void deleteBook(int id) {
+        databaseService.deleteBook(id);
+    }
+
+    @Override
+    public void deleteAuthor(int id) {
+        databaseService.deleteAuthor(id);
+    }
+
+    @Override
+    public void deleteGenre(int id) {
+        databaseService.deleteGenre(id);
+    }
+
+    private void printBooks(List<Book> books) {
+
+        if (!(books).isEmpty()) {
+            String joinedBooks = books.stream().map(Book::getTitle).collect(Collectors.joining(", "));
+            consoleService.writeMessage(joinedBooks);
+        } else {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+        }
+    }
+
 }

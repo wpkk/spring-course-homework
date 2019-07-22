@@ -45,4 +45,10 @@ public interface DatabaseService {
     void addAuthor(Author author);
 
     void addGenre(Genre genre);
+
+    void deleteBook(int id);
+
+    void deleteAuthor(int id);
+
+    void deleteGenre(int id);
 }

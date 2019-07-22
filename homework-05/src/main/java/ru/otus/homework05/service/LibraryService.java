@@ -22,7 +22,7 @@ public interface LibraryService {
 
     void getGenreByBook(String bookTitle);
 
-    void  getGenreById(int id);
+    void getGenreById(int id);
 
     void countEntities();
 
@@ -31,4 +31,11 @@ public interface LibraryService {
     void addAuthor();
 
     void addGenre();
+
+    void deleteBook(int id);
+
+    void deleteAuthor(int id);
+
+    void deleteGenre(int id);
+
 }

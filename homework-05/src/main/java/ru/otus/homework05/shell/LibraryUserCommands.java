@@ -1,6 +1,7 @@
 package ru.otus.homework05.shell;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -19,6 +20,8 @@ public class LibraryUserCommands {
     private final LibraryService libraryService;
     private final ConsoleService consoleService;
 
+    private final String EMPTY_RESULT_SET = "message.EmptyResultSet";
+
     @ShellMethod(value = "Prints titles of books", key = {"books", "get-books"})
     public void getBooks(@ShellOption(value = {"-t", "--title"}, help = "Filters books by title and prints complete book info", defaultValue = ShellOption.NULL) String title,
                          @ShellOption(value = {"-a", "--author"}, help = "Filters books by author's surname", defaultValue = ShellOption.NULL) String author,
@@ -26,31 +29,43 @@ public class LibraryUserCommands {
 
         List<String> parameters = new ArrayList<>(Arrays.asList(title, author, genre));
 
-        if (checkForMutualExclusivity(parameters)) {
-            if (title != null)
-                libraryService.getBookByTitle(title);
-            else if (author != null)
-                libraryService.getBooksByAuthor(author);
-            else if (genre != null)
-                libraryService.getBooksByGenre(genre);
-            else libraryService.getAllBooks();
+        try {
+            if (checkForMutualExclusivity(parameters)) {
+                if (title != null)
+                    libraryService.getBookByTitle(title);
+                else if (author != null)
+                    libraryService.getBooksByAuthor(author);
+                else if (genre != null)
+                    libraryService.getBooksByGenre(genre);
+                else libraryService.getAllBooks();
+            }
+        } catch (EmptyResultDataAccessException e) {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
         }
     }
 
     @ShellMethod(value = "Prints authors of books", key = {"authors", "get-authors"})
     public void getAuthors(@ShellOption(value = {"-b", "--book"}, help = "Filters authors by book title and prints complete author info", defaultValue = ShellOption.NULL) String bookTitle) {
-        if (bookTitle != null)
-            libraryService.getAuthorByBook(bookTitle);
-        else
-            libraryService.getAllAuthors();
+        try {
+            if (bookTitle != null)
+                libraryService.getAuthorByBook(bookTitle);
+            else
+                libraryService.getAllAuthors();
+        } catch (EmptyResultDataAccessException e) {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+        }
     }
 
     @ShellMethod(value = "Prints genres of books", key = {"genres", "get-genres"})
     public void getGenres(@ShellOption(value = {"-b", "--book"}, help = "Filters genres by book title and prints complete title info", defaultValue = ShellOption.NULL) String bookTitle) {
-        if (bookTitle != null)
-            libraryService.getGenreByBook(bookTitle);
-        else
-            libraryService.getAllGenres();
+        try {
+            if (bookTitle != null)
+                libraryService.getGenreByBook(bookTitle);
+            else
+                libraryService.getAllGenres();
+        } catch (EmptyResultDataAccessException e) {
+            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+        }
     }
 
     private boolean checkForMutualExclusivity(List<String> mutuallyExclusiveParameters) {
