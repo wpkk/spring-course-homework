@@ -95,7 +95,7 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Author getAurhorByFullName(String name, String surname) {
+    public Author getAuthorByFullName(String name, String surname) {
         return authorDao.getByFullName(name, surname);
     }
 

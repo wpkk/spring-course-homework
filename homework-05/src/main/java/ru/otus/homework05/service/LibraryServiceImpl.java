@@ -6,7 +6,6 @@ import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
 import ru.otus.homework05.domain.Genre;
 
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.time.Year;
 import java.util.stream.Collectors;
@@ -109,7 +108,7 @@ public class LibraryServiceImpl implements LibraryService {
         String title = consoleService.readMessage();
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_AUTHOR);
         String[] authorCredentials = consoleService.readMessage().split(" ");
-        Author author = databaseService.getAurhorByFullName(authorCredentials[0], authorCredentials[1]);
+        Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]);
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_GENRE);
         Genre genre = databaseService.getGenreByGenre(consoleService.readMessage());
         databaseService.addBook(new Book(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, title, author.getId(), genre.getId()));

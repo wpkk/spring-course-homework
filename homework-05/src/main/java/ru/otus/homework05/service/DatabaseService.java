@@ -24,7 +24,7 @@ public interface DatabaseService {
 
     Author getAuthorByBook(String bookTitle);
 
-    Author getAurhorByFullName(String name, String surname);
+    Author getAuthorByFullName(String name, String surname);
 
     List<Genre> getAllGenres();
 
