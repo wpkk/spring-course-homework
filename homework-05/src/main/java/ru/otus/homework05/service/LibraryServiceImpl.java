@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
 import ru.otus.homework05.domain.Genre;
+
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.time.Year;
 import java.util.stream.Collectors;
@@ -49,13 +51,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAllAuthors() {
-        List<Author> authors = databaseService.getAllAuthors();
-        if (!(authors).isEmpty()) {
-            String joinedAuthors = authors.stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
-            consoleService.writeMessage(joinedAuthors);
-        } else {
-            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
-        }
+        printAuthors(databaseService.getAllAuthors());
     }
 
     @Override
@@ -154,11 +150,29 @@ public class LibraryServiceImpl implements LibraryService {
         databaseService.deleteGenre(id);
     }
 
-    private void printBooks(List<Book> books) {
+    @Override
+    public void getAuthorsBornBefore(String year) {
+        printAuthors(databaseService.getAllAuthors().stream().filter(x -> x.getBirth().isBefore(Year.of(Integer.parseInt(year)))).collect(Collectors.toList()));
+    }
 
+    @Override
+    public void getAuthorsDiedBeforeAgeOf(String age) {
+        printAuthors(databaseService.getAllAuthors().stream().filter(x -> x.getDeath().getValue() - x.getBirth().getValue() < Integer.valueOf(age)).collect(Collectors.toList()));
+    }
+
+    private void printBooks(List<Book> books) {
         if (!(books).isEmpty()) {
             String joinedBooks = books.stream().map(Book::getTitle).collect(Collectors.joining(", "));
             consoleService.writeMessage(joinedBooks);
+        } else {
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
+        }
+    }
+
+    private void printAuthors(List<Author> authors) {
+        if (!(authors).isEmpty()) {
+            String joinedAuthors = authors.stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
+            consoleService.writeMessage(joinedAuthors);
         } else {
             consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }

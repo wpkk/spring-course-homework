@@ -38,4 +38,8 @@ public interface LibraryService {
 
     void deleteGenre(int id);
 
+    void getAuthorsBornBefore(String year);
+
+    void getAuthorsDiedBeforeAgeOf(String age);
+
 }

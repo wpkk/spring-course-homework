@@ -46,12 +46,22 @@ public class LibraryUserCommands {
     }
 
     @ShellMethod(value = "Prints authors of books", key = {"authors", "get-authors"})
-    public void getAuthors(@ShellOption(value = {"-b", "--book"}, help = "Filters authors by book title and prints complete author info", defaultValue = ShellOption.NULL) String bookTitle) {
+    public void getAuthors(@ShellOption(value = {"-b", "--book"}, help = "Filters authors by book title and prints complete author info", defaultValue = ShellOption.NULL) String bookTitle,
+                           @ShellOption(value = {"--born-before"}, help = "Filters authors who were born before the specified year", defaultValue = ShellOption.NULL) String year,
+                           @ShellOption(value = "--died-before-the-age-of", help = "Filters authors who died before the specified age", defaultValue = ShellOption.NULL) String age) {
+        List<String> parameters = new ArrayList<>(Arrays.asList(bookTitle, year, age));
+
         try {
-            if (bookTitle != null)
-                libraryService.getAuthorByBook(bookTitle);
-            else
-                libraryService.getAllAuthors();
+            if (checkForMutualExclusivity(parameters)) {
+                if (bookTitle != null)
+                    libraryService.getAuthorByBook(bookTitle);
+                else if (year != null)
+                    libraryService.getAuthorsBornBefore(year);
+                else if (age != null)
+                    libraryService.getAuthorsDiedBeforeAgeOf(age);
+                else
+                    libraryService.getAllAuthors();
+            }
         } catch (EmptyResultDataAccessException e) {
             consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
@@ -71,11 +81,10 @@ public class LibraryUserCommands {
 
     private boolean checkForMutualExclusivity(List<String> mutuallyExclusiveParameters) {
         if (mutuallyExclusiveParameters.stream().filter(Objects::nonNull).count() > 1) {
-            consoleService.writeMessage(MESSAGE_EXCESSIVE_SEARCH_CRITERIA);
+            consoleService.writeLocalizedMessage(MESSAGE_EXCESSIVE_SEARCH_CRITERIA);
             return false;
         } else {
             return true;
         }
     }
-
 }
