@@ -22,7 +22,7 @@ public class LibraryServiceImpl implements LibraryService {
     private static final String MESSAGE_ENTER_AUTHOR_FULLNAME = "message.enterAuthorFullname";
     private static final String MESSAGE_ENTER_AUTHOR_BIRTH_DEATH = "message.enterAuthorBirthDeath";
     private static final String MESSAGE_ENTER_GENRE = "message.enterGenre";
-    private static final String EMPTY_RESULT_SET = "message.EmptyResultSet";
+    private static final String MESSAGE_EMPTY_RESULT_SET = "message.EmptyResultSet";
 
     private static final int DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS = 1;
 
@@ -54,7 +54,7 @@ public class LibraryServiceImpl implements LibraryService {
             String joinedAuthors = authors.stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
             consoleService.writeMessage(joinedAuthors);
         } else {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 
@@ -71,7 +71,7 @@ public class LibraryServiceImpl implements LibraryService {
             String joinedGenres = genres.stream().map(Genre::getGenre).collect(Collectors.joining(", "));
             consoleService.writeMessage(joinedGenres);
         } else {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 
@@ -160,7 +160,7 @@ public class LibraryServiceImpl implements LibraryService {
             String joinedBooks = books.stream().map(Book::getTitle).collect(Collectors.joining(", "));
             consoleService.writeMessage(joinedBooks);
         } else {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 

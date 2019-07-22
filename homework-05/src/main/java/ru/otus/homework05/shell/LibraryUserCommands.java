@@ -20,7 +20,8 @@ public class LibraryUserCommands {
     private final LibraryService libraryService;
     private final ConsoleService consoleService;
 
-    private final String EMPTY_RESULT_SET = "message.EmptyResultSet";
+    private static final String MESSAGE_EMPTY_RESULT_SET = "message.EmptyResultSet";
+    private static final String MESSAGE_EXCESSIVE_SEARCH_CRITERIA = "message.ExcessiveSearchCriteria";
 
     @ShellMethod(value = "Prints titles of books", key = {"books", "get-books"})
     public void getBooks(@ShellOption(value = {"-t", "--title"}, help = "Filters books by title and prints complete book info", defaultValue = ShellOption.NULL) String title,
@@ -40,7 +41,7 @@ public class LibraryUserCommands {
                 else libraryService.getAllBooks();
             }
         } catch (EmptyResultDataAccessException e) {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 
@@ -52,7 +53,7 @@ public class LibraryUserCommands {
             else
                 libraryService.getAllAuthors();
         } catch (EmptyResultDataAccessException e) {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 
@@ -64,13 +65,13 @@ public class LibraryUserCommands {
             else
                 libraryService.getAllGenres();
         } catch (EmptyResultDataAccessException e) {
-            consoleService.writeLocalizedMessage(EMPTY_RESULT_SET);
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }
     }
 
     private boolean checkForMutualExclusivity(List<String> mutuallyExclusiveParameters) {
         if (mutuallyExclusiveParameters.stream().filter(Objects::nonNull).count() > 1) {
-            consoleService.writeMessage("Please specify only one search criteria (title/author/genre).");
+            consoleService.writeMessage(MESSAGE_EXCESSIVE_SEARCH_CRITERIA);
             return false;
         } else {
             return true;
