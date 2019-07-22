@@ -38,6 +38,13 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
+    public Author getByFullName(String name, String surname) {
+        SqlParameterSource parameterSource = new MapSqlParameterSource("name", name).
+                addValue("surname", surname);
+        return jdbcOperations.queryForObject("select * from authors where name = :name and surname = :surname", parameterSource, authorMapper);
+    }
+
+    @Override
     public Author getByBook(Book book) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("bookId", book.getId());
         return jdbcOperations.queryForObject("select * from authors a where a.id in (select author_id from books b where b.id = :bookId)", parameterSource, authorMapper);
@@ -51,12 +58,11 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public int insert(Author author) {
         SqlParameterSource parameterSource = new MapSqlParameterSource().
-                addValue("id", author.getId()).
                 addValue("name", author.getName()).
                 addValue("surname", author.getSurname()).
                 addValue("birth", author.getBirth()).
                 addValue("death", author.getDeath());
-        return jdbcOperations.update("insert into authors values(:id, :name, :surname, :birth, :death)", parameterSource);
+        return jdbcOperations.update("insert into authors values(default, :name, :surname, :birth, :death)", parameterSource);
     }
 
     @Override

@@ -93,4 +93,30 @@ public class DatabaseServiceImpl implements DatabaseService {
     public Genre getGenreById(int id) {
         return genreDao.getById(id);
     }
+
+    @Override
+    public Author getAurhorByFullName(String name, String surname) {
+        return authorDao.getByFullName(name, surname);
+    }
+
+    @Override
+    public Genre getGenreByGenre(String genre) {
+        return genreDao.getByGenre(genre);
+    }
+
+    @Override
+    public void addBook(Book book) {
+        bookDao.insert(book);
+    }
+
+    @Override
+    public void addAuthor(Author author) {
+        authorDao.insert(author);
+    }
+
+    @Override
+    public void addGenre(Genre genre) {
+        genreDao.insert(genre);
+    }
+
 }

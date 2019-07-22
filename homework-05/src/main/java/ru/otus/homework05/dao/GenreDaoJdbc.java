@@ -49,9 +49,8 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public int insert(Genre genre) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("id", genre.getId()).
-                addValue("genre", genre.getGenre());
-        return jdbcOperations.update("insert into genres values(:id, :genre)", parameterSource);
+        SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre.getGenre());
+        return jdbcOperations.update("insert into genres values(default, :genre)", parameterSource);
     }
 
     @Override

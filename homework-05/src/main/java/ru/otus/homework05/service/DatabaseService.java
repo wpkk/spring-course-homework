@@ -24,11 +24,15 @@ public interface DatabaseService {
 
     Author getAuthorByBook(String bookTitle);
 
+    Author getAurhorByFullName(String name, String surname);
+
     List<Genre> getAllGenres();
 
     Genre getGenreById(int id);
 
     Genre getGenreByBook(String bookTitle);
+
+    Genre getGenreByGenre(String genre);
 
     int countBooks();
 
@@ -36,4 +40,9 @@ public interface DatabaseService {
 
     int countGenres();
 
+    void addBook(Book book);
+
+    void addAuthor(Author author);
+
+    void addGenre(Genre genre);
 }

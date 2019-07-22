@@ -13,6 +13,8 @@ public interface AuthorDao {
 
     Author getBySurname(String surname);
 
+    Author getByFullName(String name, String surname);
+
     Author getByBook(Book book);
 
     List<Author> getAll();

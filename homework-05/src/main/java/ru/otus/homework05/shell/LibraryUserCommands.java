@@ -21,7 +21,7 @@ public class LibraryUserCommands {
 
     @ShellMethod(value = "Prints titles of books", key = {"books", "get-books"})
     public void getBooks(@ShellOption(value = {"-t", "--title"}, help = "Filters books by title and prints complete book info", defaultValue = ShellOption.NULL) String title,
-                         @ShellOption(value = {"-a", "--author"}, help = "Filters books by author", defaultValue = ShellOption.NULL) String author,
+                         @ShellOption(value = {"-a", "--author"}, help = "Filters books by author's surname", defaultValue = ShellOption.NULL) String author,
                          @ShellOption(value = {"-g", "--genre"}, help = "Filters books by genre", defaultValue = ShellOption.NULL) String genre) {
 
         List<String> parameters = new ArrayList<>(Arrays.asList(title, author, genre));

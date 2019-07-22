@@ -25,4 +25,10 @@ public interface LibraryService {
     void  getGenreById(int id);
 
     void countEntities();
+
+    void addBook();
+
+    void addAuthor();
+
+    void addGenre();
 }
