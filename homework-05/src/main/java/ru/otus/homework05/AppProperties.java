@@ -1,7 +1,6 @@
 package ru.otus.homework05;
 
 import lombok.Getter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Locale;
