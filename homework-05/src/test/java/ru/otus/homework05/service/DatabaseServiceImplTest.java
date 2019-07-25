@@ -30,7 +30,7 @@ class DatabaseServiceImplTest {
   @DisplayName("Should return books by specific author")
   void shouldReturnBooksBySpecificAuthor() {
       List<Book> books = databaseService.getBooksByAuthor(AUTHOR_SURNAME);
-      assertThat(books).hasSize(2).allMatch(b -> b.getAuthorId() == 1);
+      assertThat(books).hasSize(2).allMatch(b -> b.getAuthor().getId() == 1);
 
   }
 

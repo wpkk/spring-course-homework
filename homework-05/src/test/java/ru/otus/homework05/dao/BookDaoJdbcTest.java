@@ -5,7 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
+import ru.otus.homework05.dao.mappers.AuthorMapper;
 import ru.otus.homework05.dao.mappers.BookMapper;
+import ru.otus.homework05.dao.mappers.GenreMapper;
 import ru.otus.homework05.domain.Author;
 import ru.otus.homework05.domain.Book;
 
@@ -16,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@Import({BookDaoJdbc.class, BookMapper.class})
+@Import({BookDaoJdbc.class, BookMapper.class, AuthorDaoJdbc.class, AuthorMapper.class, GenreDaoJdbc.class, GenreMapper.class})
 @DisplayName("Class BookDaoJdbc")
 class BookDaoJdbcTest {
 
@@ -48,6 +50,6 @@ class BookDaoJdbcTest {
     void shouldReturnBooksBySpecificAuthor() {
         Author author = new Author(1, "name1", "author1", Year.of(1970), Year.of(2000));
         List<Book> books = bookDao.getByAuthor(author);
-        assertThat(books).hasSize(2).allMatch(b -> b.getAuthorId() == 1);
+        assertThat(books).hasSize(2).allMatch(b -> b.getAuthor().getId() == 1);
     }
 }

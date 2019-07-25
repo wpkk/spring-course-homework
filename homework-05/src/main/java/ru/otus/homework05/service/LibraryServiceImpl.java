@@ -111,7 +111,7 @@ public class LibraryServiceImpl implements LibraryService {
         Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]);
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_GENRE);
         Genre genre = databaseService.getGenreByGenre(consoleService.readMessage());
-        databaseService.addBook(new Book(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, title, author.getId(), genre.getId()));
+        databaseService.addBook(new Book(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, title, author, genre));
     }
 
     @Override

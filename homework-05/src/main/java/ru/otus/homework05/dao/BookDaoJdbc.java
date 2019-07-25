@@ -61,8 +61,8 @@ public class BookDaoJdbc implements BookDao {
     public int insert(Book book) {
         SqlParameterSource parameterSource = new MapSqlParameterSource().
                 addValue("title", book.getTitle()).
-                addValue("authorId", book.getAuthorId()).
-                addValue("genreId", book.getGenreId());
+                addValue("authorId", book.getAuthor().getId()).
+                addValue("genreId", book.getGenre().getId());
 
         return jdbcOperations.update("insert into books values (default, :title, :authorId, :genreId)", parameterSource);
     }

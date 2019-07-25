@@ -12,8 +12,8 @@ public class Book {
     @Getter @Setter
     private String title;
     @Getter @Setter
-    private int authorId;
+    private Author author;
     @Getter @Setter
-    private int genreId;
+    private Genre genre;
 
 }
