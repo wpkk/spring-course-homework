@@ -30,32 +30,31 @@ public class BookDaoJdbc implements BookDao {
     @Override
     public Book getById(int id) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
-        return jdbcOperations.queryForObject("select * from books where id = :id", parameterSource, bookMapper);
+        return jdbcOperations.queryForObject("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where b.ID = :id", parameterSource, bookMapper);
     }
 
     @Override
     public Book getByTitle(String title) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("title", title);
-        return jdbcOperations.queryForObject("select * from books where title = :title", parameterSource, bookMapper);
+        return jdbcOperations.queryForObject("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where b.TITLE = :title", parameterSource, bookMapper);
     }
 
     @Override
     public List<Book> getAll() {
-        return jdbcOperations.query("select * from books", bookMapper);
+        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID", bookMapper);
     }
 
     @Override
     public List<Book> getByAuthor(Author author) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("surname", author.getSurname());
-        return jdbcOperations.query("select * from books where author_id in " +
-                "(select id from authors where surname = :surname)", parameterSource, bookMapper);
+        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where a.SURNAME = :surname", parameterSource, bookMapper);
     }
 
     @Override
     public List<Book> getByGenre(Genre genre) {
         SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre.getGenre());
-        return jdbcOperations.query("select * from books where genre_id in " +
-                "(select id from genres where genre = :genre)", parameterSource, bookMapper);    }
+        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where g.GENRE = :genre", parameterSource, bookMapper);
+    }
 
     @Override
     public int insert(Book book) {
