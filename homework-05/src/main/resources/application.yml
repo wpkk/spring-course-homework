@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    initialization-mode: always
+  messages:
+    basename: i18n/bundle
+    encoding: UTF-8
