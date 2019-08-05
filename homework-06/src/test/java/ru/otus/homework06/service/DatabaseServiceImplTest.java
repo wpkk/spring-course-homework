@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import ru.otus.homework06.dao.AuthorDaoJdbc;
 import ru.otus.homework06.dao.BookDaoJdbc;
-import ru.otus.homework06.dao.GenreDaoJdbc;
+import ru.otus.homework06.dao.GenreDaoJpa;
 import ru.otus.homework06.dao.mappers.AuthorMapper;
 import ru.otus.homework06.dao.mappers.BookMapper;
 import ru.otus.homework06.dao.mappers.GenreMapper;
@@ -18,7 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@Import({DatabaseServiceImpl.class, BookDaoJdbc.class, BookMapper.class, AuthorDaoJdbc.class, AuthorMapper.class, GenreDaoJdbc.class, GenreMapper.class})
+@Import({DatabaseServiceImpl.class, BookDaoJdbc.class, BookMapper.class, AuthorDaoJdbc.class, AuthorMapper.class, GenreDaoJpa.class, GenreMapper.class})
 @DisplayName("Class DatabaseServiceImpl")
 class DatabaseServiceImplTest {
 

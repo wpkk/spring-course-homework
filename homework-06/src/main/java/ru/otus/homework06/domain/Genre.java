@@ -1,14 +1,23 @@
 package ru.otus.homework06.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@AllArgsConstructor @ToString
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "genres")
+@AllArgsConstructor @NoArgsConstructor
+@ToString
 public class Genre {
+
     @Getter @Setter
+    @Id
+    @GeneratedValue
     private int id;
+
     @Getter @Setter
     private String genre;
 
