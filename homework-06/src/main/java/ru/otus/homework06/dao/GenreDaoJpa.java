@@ -30,7 +30,9 @@ public class GenreDaoJpa implements GenreDao {
 
     @Override
     public int count() {
-        return jdbcOperations.queryForObject("select count(*) from genres", new EmptySqlParameterSource(), Integer.class);
+//        return jdbcOperations.queryForObject("select count(*) from genres", new EmptySqlParameterSource(), Integer.class);
+        return em.createQuery("select count(g) from Genre g", Long.class)
+                .getSingleResult() .intValue();
     }
 
     @Override

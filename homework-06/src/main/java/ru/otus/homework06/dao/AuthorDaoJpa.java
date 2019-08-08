@@ -10,11 +10,19 @@ import ru.otus.homework06.dao.mappers.AuthorMapper;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @SuppressWarnings("ConstantConditions")
-@Repository @AllArgsConstructor
-public class AuthorDaoJdbc implements AuthorDao {
+@Repository
+@Transactional
+@AllArgsConstructor
+public class AuthorDaoJpa implements AuthorDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     private final NamedParameterJdbcOperations jdbcOperations;
 
@@ -22,7 +30,10 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public int count() {
-        return jdbcOperations.queryForObject("select count(*) from authors", new EmptySqlParameterSource(), Integer.class);
+//        return jdbcOperations.queryForObject("select count(*) from authors", new EmptySqlParameterSource(), Integer.class);
+        return em.createQuery("select count(a) from Author a", Long.class)
+                .getSingleResult().intValue();
+
     }
 
     @Override
