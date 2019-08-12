@@ -1,4 +1,4 @@
-insert into authors (ID, NAME, SURNAME, YEAR_BIRTH, YEAR_DEATH) values (default, 'name1', 'author1', '1970', '2000');
+insert into authors (ID, NAME, SURNAME, YEAR_BIRTH, YEAR_DEATH) values (default, 'name1', 'author1', '197000', '2000');
 insert into authors (ID, NAME, SURNAME, YEAR_BIRTH, YEAR_DEATH) values (default, 'name2', 'author2', '1973', '2003');
 
 insert into genres (ID, GENRE) values (default, 'genre1');

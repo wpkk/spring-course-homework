@@ -1,24 +1,20 @@
 package ru.otus.homework06.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import ru.otus.homework06.dao.converters.YearAttributeConverter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Year;
 
 @Entity
 @Table(name = "authors")
-@AllArgsConstructor @ToString
+@AllArgsConstructor @NoArgsConstructor
+@ToString
 public class Author {
 
-    @Getter @Setter
     @Id
     @GeneratedValue
+    @Getter @Setter
     private int id;
 
     @Getter @Setter
@@ -27,9 +23,13 @@ public class Author {
     @Getter @Setter
     private String surname;
 
+    @Column(name = "year_birth")
+    @Convert(converter = YearAttributeConverter.class)
     @Getter @Setter
     private Year birth;
 
+    @Column(name = "year_death")
+    @Convert(converter = YearAttributeConverter.class)
     @Getter @Setter
     private Year death;
 

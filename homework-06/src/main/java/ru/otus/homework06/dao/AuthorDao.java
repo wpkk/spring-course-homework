@@ -19,7 +19,7 @@ public interface AuthorDao {
 
     List<Author> getAll();
 
-    int insert(Author author);
+    void insert(Author author);
 
     int deleteById(int id);
 

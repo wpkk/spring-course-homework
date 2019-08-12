@@ -11,11 +11,19 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.otus.homework06.domain.Genre;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 @SuppressWarnings("ConstantConditions")
 
-@Repository @AllArgsConstructor
+@Repository
+@Transactional
+@AllArgsConstructor
 public class BookDaoJdbc implements BookDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     private final NamedParameterJdbcOperations jdbcOperations;
 
@@ -23,52 +31,51 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public int count() {
-        SqlParameterSource parameterSource = new EmptySqlParameterSource();
-        return jdbcOperations.queryForObject("select count(*) from books", parameterSource, Integer.class);
+        return em.createQuery("select count(b) from Book b", Long.class).
+                getSingleResult().intValue();
     }
 
     @Override
     public Book getById(int id) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
-        return jdbcOperations.queryForObject("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where b.ID = :id", parameterSource, bookMapper);
+        return em.find(Book.class, id);
     }
 
     @Override
     public Book getByTitle(String title) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("title", title);
-        return jdbcOperations.queryForObject("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where b.TITLE = :title", parameterSource, bookMapper);
+        return em.createQuery("select b from Book b where title = :title", Book.class).
+                setParameter("title", title).
+                getSingleResult();
     }
 
     @Override
     public List<Book> getAll() {
-        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID", bookMapper);
+        return em.createQuery("select b from Book b", Book.class).
+                getResultList();
     }
 
     @Override
     public List<Book> getByAuthor(Author author) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", author.getSurname());
-        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where a.SURNAME = :surname", parameterSource, bookMapper);
+        return em.createQuery("select b from Book b where author_id = :authorId", Book.class).
+                setParameter("authorId", author.getId()).
+                getResultList();
     }
 
     @Override
     public List<Book> getByGenre(Genre genre) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("genre", genre.getGenre());
-        return jdbcOperations.query("select * from BOOKS b inner join AUTHORS a on b.AUTHOR_ID = a.ID inner join GENRES g on b.GENRE_ID = g.ID where g.GENRE = :genre", parameterSource, bookMapper);
+        return em.createQuery("select b from Book b where genre_id = :genreId", Book.class).
+                setParameter("genreId", genre.getId()).
+                getResultList();
     }
 
     @Override
-    public int insert(Book book) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().
-                addValue("title", book.getTitle()).
-                addValue("authorId", book.getAuthor().getId()).
-                addValue("genreId", book.getGenre().getId());
-
-        return jdbcOperations.update("insert into books values (default, :title, :authorId, :genreId)", parameterSource);
+    public void insert(Book book) {
+        em.persist(book);
     }
 
     @Override
     public int deleteById(int id) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("id", id);
-        return jdbcOperations.update("delete from books where id = :id", parameterSource);
+        Book book = em.find(Book.class, id);
+        em.remove(book);
+        return 1;
     }
 }

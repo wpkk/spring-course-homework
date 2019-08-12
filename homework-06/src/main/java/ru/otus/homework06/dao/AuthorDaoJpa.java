@@ -24,61 +24,53 @@ public class AuthorDaoJpa implements AuthorDao {
     @PersistenceContext
     private EntityManager em;
 
-    private final NamedParameterJdbcOperations jdbcOperations;
-
-    private final AuthorMapper authorMapper;
-
     @Override
     public int count() {
-//        return jdbcOperations.queryForObject("select count(*) from authors", new EmptySqlParameterSource(), Integer.class);
         return em.createQuery("select count(a) from Author a", Long.class)
                 .getSingleResult().intValue();
-
     }
 
     @Override
     public Author getById(int id) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
-        return jdbcOperations.queryForObject("select * from authors where id = :id", parameterSource, authorMapper);
+        return em.find(Author.class, id);
     }
 
     @Override
     public Author getBySurname(String surname) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("surname", surname);
-        return jdbcOperations.queryForObject("select * from authors where surname = :surname", parameterSource, authorMapper);
+        return em.createQuery("select from Author a where surname = :surname", Author.class).
+                setParameter("surname", surname).
+                getSingleResult();
     }
 
     @Override
     public Author getByFullName(String name, String surname) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("name", name).
-                addValue("surname", surname);
-        return jdbcOperations.queryForObject("select * from authors where name = :name and surname = :surname", parameterSource, authorMapper);
+        return em.createQuery("select a from Author a where name = :name and surname = :surname", Author.class).
+                setParameter("name", name).
+                setParameter("surname", surname).
+                getSingleResult();
     }
 
     @Override
     public Author getByBook(Book book) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("bookId", book.getId());
-        return jdbcOperations.queryForObject("select * from authors a where a.id in (select author_id from books b where b.id = :bookId)", parameterSource, authorMapper);
+        return em.createQuery("select a from Author a where id = :id", Author.class).
+                setParameter("id", book.getAuthor().getId()).
+                getSingleResult();
     }
 
     @Override
     public List<Author> getAll() {
-        return jdbcOperations.query("select * from authors", new EmptySqlParameterSource(), authorMapper);
+        return em.createQuery("select a from Author a", Author.class).getResultList();
     }
 
     @Override
-    public int insert(Author author) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().
-                addValue("name", author.getName()).
-                addValue("surname", author.getSurname()).
-                addValue("birth", author.getBirth()).
-                addValue("death", author.getDeath());
-        return jdbcOperations.update("insert into authors values(default, :name, :surname, :birth, :death)", parameterSource);
+    public void insert(Author author) {
+        em.persist(author);
     }
 
     @Override
     public int deleteById(int id) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
-        return jdbcOperations.update("delete from authors where id = :id", parameterSource);
+        Author author = em.find(Author.class, id);
+        em.remove(author);
+        return 1;
     }
 }

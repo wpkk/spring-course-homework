@@ -20,7 +20,7 @@ public interface BookDao {
 
     List<Book> getByGenre(Genre genre);
 
-    int insert(Book book);
+    void insert(Book book);
 
     int deleteById(int id);
 
