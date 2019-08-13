@@ -2,10 +2,7 @@ package ru.otus.homework06.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "genres")
@@ -15,7 +12,7 @@ public class Genre {
 
     @Getter @Setter
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Getter @Setter

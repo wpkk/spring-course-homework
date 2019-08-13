@@ -13,7 +13,7 @@ import java.time.Year;
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     private int id;
 

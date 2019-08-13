@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 @Transactional
 @AllArgsConstructor
-public class BookDaoJdbc implements BookDao {
+public class BookDaoJpa implements BookDao {
 
     @PersistenceContext
     private EntityManager em;

@@ -12,7 +12,7 @@ public class Book {
 
     @Getter @Setter
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Getter @Setter

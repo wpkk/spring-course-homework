@@ -111,7 +111,11 @@ public class LibraryServiceImpl implements LibraryService {
         Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]);
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_GENRE);
         Genre genre = databaseService.getGenreByGenre(consoleService.readMessage());
-        databaseService.addBook(new Book(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, title, author, genre));
+        Book book = new Book();
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setGenre(genre);
+        databaseService.addBook(book);
     }
 
     @Override
@@ -120,18 +124,21 @@ public class LibraryServiceImpl implements LibraryService {
         String[] authorCredentials = consoleService.readMessage().split(" ");
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_AUTHOR_BIRTH_DEATH);
         String[] authorYears = consoleService.readMessage().split(" ");
-        databaseService.addAuthor(new Author(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS,
-                authorCredentials[0],
-                authorCredentials[1],
-                Year.of(Integer.parseInt(authorYears[0])),
-                Year.of(Integer.parseInt(authorYears[1]))));
+        Author author = new Author();
+        author.setName(authorCredentials[0]);
+        author.setSurname(authorCredentials[1]);
+        author.setBirth(Year.of(Integer.parseInt(authorYears[0])));
+        author.setDeath(Year.of(Integer.parseInt(authorYears[1])));
+        databaseService.addAuthor(author);
     }
 
     @Override
     public void addGenre() {
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_GENRE);
-        String genre = consoleService.readMessage();
-        databaseService.addGenre(new Genre(DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS, genre));
+        String genreValue = consoleService.readMessage();
+        Genre genre = new Genre();
+        genre.setGenre(genreValue);
+        databaseService.addGenre(genre);
     }
 
     @Override

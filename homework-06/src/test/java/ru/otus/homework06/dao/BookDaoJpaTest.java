@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@Import({BookDaoJdbc.class, BookMapper.class, AuthorDaoJpa.class, AuthorMapper.class, GenreDaoJpa.class, GenreMapper.class})
+@Import({BookDaoJpa.class, BookMapper.class, AuthorDaoJpa.class, AuthorMapper.class, GenreDaoJpa.class, GenreMapper.class})
 @DisplayName("Class BookDaoJdbc")
-class BookDaoJdbcTest {
+class BookDaoJpaTest {
 
     @Autowired
     private BookDao bookDao;
