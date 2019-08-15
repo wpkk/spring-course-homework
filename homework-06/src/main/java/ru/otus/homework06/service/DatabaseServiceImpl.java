@@ -1,6 +1,7 @@
 package ru.otus.homework06.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.homework06.dao.AuthorDao;
 import ru.otus.homework06.dao.BookDao;
@@ -10,6 +11,7 @@ import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service @AllArgsConstructor
 public class DatabaseServiceImpl implements DatabaseService {
@@ -32,13 +34,13 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public List<Book> getBooksByAuthor(String surname) {
-        Author author = authorDao.getBySurname(surname);
+        Author author = authorDao.getBySurname(surname).orElseThrow(() -> new EmptyResultDataAccessException("Author", 1));
         return bookDao.getByAuthor(author);
     }
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
-        Genre genreObject = genreDao.getByGenre(genre);
+        Genre genreObject = genreDao.getByGenre(genre).orElseThrow(() -> new EmptyResultDataAccessException("Genre", 1));
         return bookDao.getByGenre(genreObject);
     }
 
@@ -48,7 +50,7 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Author getAuthorByBook(String bookTitle) {
+    public Optional<Author> getAuthorByBook(String bookTitle) {
         Book book = bookDao.getByTitle(bookTitle);
         return authorDao.getByBook(book);
     }
@@ -59,7 +61,7 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Genre getGenreByBook(String bookTitle) {
+    public Optional<Genre> getGenreByBook(String bookTitle) {
         Book book = bookDao.getByTitle(bookTitle);
         return genreDao.getByBook(book);
     }
@@ -80,27 +82,27 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Book getBookById(int id) {
+    public Optional<Book> getBookById(int id) {
         return bookDao.getById(id);
     }
 
     @Override
-    public Author getAuthorById(int id) {
+    public Optional<Author> getAuthorById(int id) {
         return authorDao.getById(id);
     }
 
     @Override
-    public Genre getGenreById(int id) {
+    public Optional<Genre> getGenreById(int id) {
         return genreDao.getById(id);
     }
 
     @Override
-    public Author getAuthorByFullName(String name, String surname) {
+    public Optional<Author> getAuthorByFullName(String name, String surname) {
         return authorDao.getByFullName(name, surname);
     }
 
     @Override
-    public Genre getGenreByGenre(String genre) {
+    public Optional<Genre> getGenreByGenre(String genre) {
         return genreDao.getByGenre(genre);
     }
 

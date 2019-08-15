@@ -2,9 +2,6 @@ package ru.otus.homework06.dao;
 
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -15,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @SuppressWarnings("ConstantConditions")
 
 @Repository
@@ -36,8 +35,8 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public Book getById(int id) {
-        return em.find(Book.class, id);
+    public Optional<Book> getById(int id) {
+        return Optional.ofNullable(em.find(Book.class, id));
     }
 
     @Override

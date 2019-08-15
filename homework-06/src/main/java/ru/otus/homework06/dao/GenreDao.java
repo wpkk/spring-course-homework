@@ -4,16 +4,17 @@ import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GenreDao {
 
     int count();
 
-    Genre getById(int id);
+    Optional<Genre> getById(int id);
 
-    Genre getByGenre(String genre);
+    Optional<Genre> getByGenre(String genre);
 
-    Genre getByBook(Book book);
+    Optional<Genre> getByBook(Book book);
 
     List<Genre> getAll();
 

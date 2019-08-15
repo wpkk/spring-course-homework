@@ -1,12 +1,7 @@
 package ru.otus.homework06.dao;
 
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-import ru.otus.homework06.dao.mappers.AuthorMapper;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 
@@ -14,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("ConstantConditions")
 @Repository
@@ -31,30 +27,30 @@ public class AuthorDaoJpa implements AuthorDao {
     }
 
     @Override
-    public Author getById(int id) {
-        return em.find(Author.class, id);
+    public Optional<Author> getById(int id) {
+        return Optional.ofNullable(em.find(Author.class, id));
     }
 
     @Override
-    public Author getBySurname(String surname) {
-        return em.createQuery("select from Author a where surname = :surname", Author.class).
+    public Optional<Author> getBySurname(String surname) {
+        return Optional.ofNullable(em.createQuery("select a from Author a where surname = :surname", Author.class).
                 setParameter("surname", surname).
-                getSingleResult();
+                getSingleResult());
     }
 
     @Override
-    public Author getByFullName(String name, String surname) {
-        return em.createQuery("select a from Author a where name = :name and surname = :surname", Author.class).
+    public Optional<Author> getByFullName(String name, String surname) {
+        return Optional.ofNullable(em.createQuery("select a from Author a where name = :name and surname = :surname", Author.class).
                 setParameter("name", name).
                 setParameter("surname", surname).
-                getSingleResult();
+                getSingleResult());
     }
 
     @Override
-    public Author getByBook(Book book) {
-        return em.createQuery("select a from Author a where id = :id", Author.class).
+    public Optional<Author> getByBook(Book book) {
+        return Optional.ofNullable(em.createQuery("select a from Author a where id = :id", Author.class).
                 setParameter("id", book.getAuthor().getId()).
-                getSingleResult();
+                getSingleResult());
     }
 
     @Override

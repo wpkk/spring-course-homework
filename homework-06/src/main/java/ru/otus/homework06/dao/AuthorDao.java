@@ -4,18 +4,19 @@ import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorDao {
 
     int count();
 
-    Author getById(int id);
+    Optional<Author> getById(int id);
 
-    Author getBySurname(String surname);
+    Optional<Author> getBySurname(String surname);
 
-    Author getByFullName(String name, String surname);
+    Optional<Author> getByFullName(String name, String surname);
 
-    Author getByBook(Book book);
+    Optional<Author> getByBook(Book book);
 
     List<Author> getAll();
 

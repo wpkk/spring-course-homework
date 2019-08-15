@@ -5,12 +5,13 @@ import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DatabaseService {
 
     List<Book> getAllBooks();
 
-    Book getBookById(int id);
+    Optional<Book> getBookById(int id);
 
     Book getBookByTitle(String title);
 
@@ -20,19 +21,19 @@ public interface DatabaseService {
 
     List<Author> getAllAuthors();
 
-    Author getAuthorById(int id);
+    Optional<Author> getAuthorById(int id);
 
-    Author getAuthorByBook(String bookTitle);
+    Optional<Author> getAuthorByBook(String bookTitle);
 
-    Author getAuthorByFullName(String name, String surname);
+    Optional<Author> getAuthorByFullName(String name, String surname);
 
     List<Genre> getAllGenres();
 
-    Genre getGenreById(int id);
+    Optional<Genre> getGenreById(int id);
 
-    Genre getGenreByBook(String bookTitle);
+    Optional<Genre> getGenreByBook(String bookTitle);
 
-    Genre getGenreByGenre(String genre);
+    Optional<Genre> getGenreByGenre(String genre);
 
     int countBooks();
 

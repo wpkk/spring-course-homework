@@ -1,20 +1,15 @@
 package ru.otus.homework06.dao;
 
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-import ru.otus.homework06.dao.mappers.GenreMapper;
 import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @SuppressWarnings("ConstantConditions")
 @Repository
@@ -32,22 +27,22 @@ public class GenreDaoJpa implements GenreDao {
     }
 
     @Override
-    public Genre getById(int id) {
-        return em.find(Genre.class, id);
+    public Optional<Genre> getById(int id) {
+        return Optional.ofNullable(em.find(Genre.class, id));
     }
 
     @Override
-    public Genre getByGenre(String genre) {
-        return em.createQuery("select g from Genre g where g.genre = :genre", Genre.class)
+    public Optional<Genre> getByGenre(String genre) {
+        return Optional.ofNullable(em.createQuery("select g from Genre g where g.genre = :genre", Genre.class)
                 .setParameter("genre", genre)
-                .getSingleResult();
+                .getSingleResult());
     }
 
     @Override
-    public Genre getByBook(Book book) {
-        return em.createQuery("select g from Genre g where g.id = :id", Genre.class)
+    public Optional<Genre> getByBook(Book book) {
+        return Optional.ofNullable(em.createQuery("select g from Genre g where g.id = :id", Genre.class)
                 .setParameter("id", book.getGenre().getId())
-                .getSingleResult();
+                .getSingleResult());
     }
 
     @Override

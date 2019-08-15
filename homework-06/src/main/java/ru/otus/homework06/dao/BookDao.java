@@ -5,12 +5,13 @@ import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookDao {
 
     int count();
 
-    Book getById(int id);
+    Optional<Book> getById(int id);
 
     Book getByTitle(String title);
 

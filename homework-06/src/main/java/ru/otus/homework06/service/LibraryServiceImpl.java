@@ -1,6 +1,7 @@
 package ru.otus.homework06.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
@@ -24,8 +25,6 @@ public class LibraryServiceImpl implements LibraryService {
     private static final String MESSAGE_ENTER_AUTHOR_BIRTH_DEATH = "message.enterAuthorBirthDeath";
     private static final String MESSAGE_ENTER_GENRE = "message.enterGenre";
     private static final String MESSAGE_EMPTY_RESULT_SET = "message.EmptyResultSet";
-
-    private static final int DEFAULT_VALUE_FOR_AUTOINCREMENT_FIELDS = 1;
 
     @Override
     public void getAllBooks() {
@@ -55,7 +54,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAuthorByBook(String bookTitle) {
-        Author author = databaseService.getAuthorByBook(bookTitle);
+        Author author = databaseService.getAuthorByBook(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(author);
     }
 
@@ -72,7 +71,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getGenreByBook(String bookTitle) {
-        Genre genre = databaseService.getGenreByBook(bookTitle);
+        Genre genre = databaseService.getGenreByBook(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(genre);
     }
 
@@ -86,19 +85,19 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getBookById(int id) {
-        Book book = databaseService.getBookById(id);
+        Book book = databaseService.getBookById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(book);
     }
 
     @Override
     public void getAuthorById(int id) {
-        Author author = databaseService.getAuthorById(id);
+        Author author = databaseService.getAuthorById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(author);
     }
 
     @Override
     public void getGenreById(int id) {
-        Genre genre = databaseService.getGenreById(id);
+        Genre genre = databaseService.getGenreById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(genre);
     }
 
@@ -108,9 +107,9 @@ public class LibraryServiceImpl implements LibraryService {
         String title = consoleService.readMessage();
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_AUTHOR);
         String[] authorCredentials = consoleService.readMessage().split(" ");
-        Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]);
+        Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_GENRE);
-        Genre genre = databaseService.getGenreByGenre(consoleService.readMessage());
+        Genre genre = databaseService.getGenreByGenre(consoleService.readMessage()).orElseThrow(() -> new EmptyResultDataAccessException(1));
         Book book = new Book();
         book.setTitle(title);
         book.setAuthor(author);
