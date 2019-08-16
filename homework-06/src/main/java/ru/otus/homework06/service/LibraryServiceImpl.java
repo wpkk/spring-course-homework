@@ -33,7 +33,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getBookByTitle(String title) {
-        Book book = databaseService.getBookByTitle(title);
+        Book book = databaseService.getBookByTitle(title).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(book);
     }
 

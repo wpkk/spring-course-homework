@@ -13,7 +13,7 @@ public interface DatabaseService {
 
     Optional<Book> getBookById(int id);
 
-    Book getBookByTitle(String title);
+    Optional<Book> getBookByTitle(String title);
 
     List<Book> getBooksByAuthor(String author);
 

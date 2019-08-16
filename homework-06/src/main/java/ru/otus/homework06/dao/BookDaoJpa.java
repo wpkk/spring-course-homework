@@ -40,10 +40,10 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public Book getByTitle(String title) {
-        return em.createQuery("select b from Book b where title = :title", Book.class).
+    public Optional<Book> getByTitle(String title) {
+        return Optional.ofNullable(em.createQuery("select b from Book b where title = :title", Book.class).
                 setParameter("title", title).
-                getSingleResult();
+                getSingleResult());
     }
 
     @Override

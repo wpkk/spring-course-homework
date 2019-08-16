@@ -28,7 +28,7 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Book getBookByTitle(String title) {
+    public Optional<Book> getBookByTitle(String title) {
         return bookDao.getByTitle(title);
     }
 
@@ -51,7 +51,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Optional<Author> getAuthorByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle);
+        Book book = bookDao.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
         return authorDao.getByBook(book);
     }
 
@@ -62,7 +62,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Optional<Genre> getGenreByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle);
+        Book book = bookDao.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
         return genreDao.getByBook(book);
     }
 
