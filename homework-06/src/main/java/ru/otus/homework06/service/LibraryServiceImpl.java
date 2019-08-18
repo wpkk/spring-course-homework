@@ -33,7 +33,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getBookByTitle(String title) {
-        Book book = databaseService.getBookByTitle(title).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Book book = databaseService.getBookByTitle(title);
         consoleService.writeMessage(book);
     }
 
@@ -54,7 +54,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAuthorByBook(String bookTitle) {
-        Author author = databaseService.getAuthorByBook(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Author author = databaseService.getAuthorByBook(bookTitle);
         consoleService.writeMessage(author);
     }
 
@@ -71,7 +71,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getGenreByBook(String bookTitle) {
-        Genre genre = databaseService.getGenreByBook(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Genre genre = databaseService.getGenreByBook(bookTitle);
         consoleService.writeMessage(genre);
     }
 
@@ -107,9 +107,9 @@ public class LibraryServiceImpl implements LibraryService {
         String title = consoleService.readMessage();
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_AUTHOR);
         String[] authorCredentials = consoleService.readMessage().split(" ");
-        Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Author author = databaseService.getAuthorByFullName(authorCredentials[0], authorCredentials[1]);
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_GENRE);
-        Genre genre = databaseService.getGenreByGenre(consoleService.readMessage()).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        Genre genre = databaseService.getGenreByGenre(consoleService.readMessage());
         Book book = new Book();
         book.setTitle(title);
         book.setAuthor(author);

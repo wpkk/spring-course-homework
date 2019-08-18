@@ -13,7 +13,7 @@ public interface DatabaseService {
 
     Optional<Book> getBookById(int id);
 
-    Optional<Book> getBookByTitle(String title);
+    Book getBookByTitle(String title);
 
     List<Book> getBooksByAuthor(String author);
 
@@ -23,17 +23,17 @@ public interface DatabaseService {
 
     Optional<Author> getAuthorById(int id);
 
-    Optional<Author> getAuthorByBook(String bookTitle);
+    Author getAuthorByBook(String bookTitle);
 
-    Optional<Author> getAuthorByFullName(String name, String surname);
+    Author getAuthorByFullName(String name, String surname);
 
     List<Genre> getAllGenres();
 
     Optional<Genre> getGenreById(int id);
 
-    Optional<Genre> getGenreByBook(String bookTitle);
+    Genre getGenreByBook(String bookTitle);
 
-    Optional<Genre> getGenreByGenre(String genre);
+    Genre getGenreByGenre(String genre);
 
     int countBooks();
 

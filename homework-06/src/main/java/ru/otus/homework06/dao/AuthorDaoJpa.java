@@ -32,25 +32,25 @@ public class AuthorDaoJpa implements AuthorDao {
     }
 
     @Override
-    public Optional<Author> getBySurname(String surname) {
-        return Optional.ofNullable(em.createQuery("select a from Author a where surname = :surname", Author.class).
+    public Author getBySurname(String surname) {
+        return em.createQuery("select a from Author a where surname = :surname", Author.class).
                 setParameter("surname", surname).
-                getSingleResult());
+                getSingleResult();
     }
 
     @Override
-    public Optional<Author> getByFullName(String name, String surname) {
-        return Optional.ofNullable(em.createQuery("select a from Author a where name = :name and surname = :surname", Author.class).
+    public Author getByFullName(String name, String surname) {
+        return em.createQuery("select a from Author a where name = :name and surname = :surname", Author.class).
                 setParameter("name", name).
                 setParameter("surname", surname).
-                getSingleResult());
+                getSingleResult();
     }
 
     @Override
-    public Optional<Author> getByBook(Book book) {
-        return Optional.ofNullable(em.createQuery("select a from Author a where id = :id", Author.class).
+    public Author getByBook(Book book) {
+        return em.createQuery("select a from Author a where id = :id", Author.class).
                 setParameter("id", book.getAuthor().getId()).
-                getSingleResult());
+                getSingleResult();
     }
 
     @Override

@@ -12,11 +12,11 @@ public interface AuthorDao {
 
     Optional<Author> getById(int id);
 
-    Optional<Author> getBySurname(String surname);
+    Author getBySurname(String surname);
 
-    Optional<Author> getByFullName(String name, String surname);
+    Author getByFullName(String name, String surname);
 
-    Optional<Author> getByBook(Book book);
+    Author getByBook(Book book);
 
     List<Author> getAll();
 

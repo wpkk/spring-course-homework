@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.otus.homework06.dao.mappers.AuthorMapper;
 import ru.otus.homework06.dao.mappers.BookMapper;
 import ru.otus.homework06.dao.mappers.GenreMapper;
@@ -34,7 +35,7 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should get correct book by id")
     void shouldGetCorrectBookById() {
-        Book book = bookDao.getById(2);
+        Book book = bookDao.getById(2).orElseThrow(() -> new EmptyResultDataAccessException(1));
         assertThat(book.getId()).isEqualTo(2);
     }
 

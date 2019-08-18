@@ -13,7 +13,7 @@ public interface BookDao {
 
     Optional<Book> getById(int id);
 
-    Optional<Book> getByTitle(String title);
+    Book getByTitle(String title);
 
     List<Book> getAll();
 

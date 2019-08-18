@@ -1,7 +1,6 @@
 package ru.otus.homework06.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.homework06.dao.AuthorDao;
 import ru.otus.homework06.dao.BookDao;
@@ -28,19 +27,19 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Optional<Book> getBookByTitle(String title) {
+    public Book getBookByTitle(String title) {
         return bookDao.getByTitle(title);
     }
 
     @Override
     public List<Book> getBooksByAuthor(String surname) {
-        Author author = authorDao.getBySurname(surname).orElseThrow(() -> new EmptyResultDataAccessException("Author", 1));
+        Author author = authorDao.getBySurname(surname);
         return bookDao.getByAuthor(author);
     }
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
-        Genre genreObject = genreDao.getByGenre(genre).orElseThrow(() -> new EmptyResultDataAccessException("Genre", 1));
+        Genre genreObject = genreDao.getByGenre(genre);
         return bookDao.getByGenre(genreObject);
     }
 
@@ -50,8 +49,8 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Optional<Author> getAuthorByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+    public Author getAuthorByBook(String bookTitle) {
+        Book book = bookDao.getByTitle(bookTitle);
         return authorDao.getByBook(book);
     }
 
@@ -61,8 +60,8 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Optional<Genre> getGenreByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+    public Genre getGenreByBook(String bookTitle) {
+        Book book = bookDao.getByTitle(bookTitle);
         return genreDao.getByBook(book);
     }
 
@@ -97,12 +96,12 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Optional<Author> getAuthorByFullName(String name, String surname) {
+    public Author getAuthorByFullName(String name, String surname) {
         return authorDao.getByFullName(name, surname);
     }
 
     @Override
-    public Optional<Genre> getGenreByGenre(String genre) {
+    public Genre getGenreByGenre(String genre) {
         return genreDao.getByGenre(genre);
     }
 
@@ -132,7 +131,6 @@ public class DatabaseServiceImpl implements DatabaseService {
         if (authorDao.deleteById(id) == 0)
             throw new IllegalArgumentException();
     }
-
 
     @Override
     public void deleteGenre(int id) {

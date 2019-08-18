@@ -12,9 +12,9 @@ public interface GenreDao {
 
     Optional<Genre> getById(int id);
 
-    Optional<Genre> getByGenre(String genre);
+    Genre getByGenre(String genre);
 
-    Optional<Genre> getByBook(Book book);
+    Genre getByBook(Book book);
 
     List<Genre> getAll();
 

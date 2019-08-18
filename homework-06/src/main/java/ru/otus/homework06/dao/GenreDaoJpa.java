@@ -19,7 +19,6 @@ public class GenreDaoJpa implements GenreDao {
 
     @PersistenceContext
     private EntityManager em;
-
     @Override
     public int count() {
         return em.createQuery("select count(g) from Genre g", Long.class)
@@ -32,17 +31,17 @@ public class GenreDaoJpa implements GenreDao {
     }
 
     @Override
-    public Optional<Genre> getByGenre(String genre) {
-        return Optional.ofNullable(em.createQuery("select g from Genre g where g.genre = :genre", Genre.class)
+    public Genre getByGenre(String genre) {
+        return em.createQuery("select g from Genre g where g.genre = :genre", Genre.class)
                 .setParameter("genre", genre)
-                .getSingleResult());
+                .getSingleResult();
     }
 
     @Override
-    public Optional<Genre> getByBook(Book book) {
-        return Optional.ofNullable(em.createQuery("select g from Genre g where g.id = :id", Genre.class)
+    public Genre getByBook(Book book) {
+        return em.createQuery("select g from Genre g where g.id = :id", Genre.class)
                 .setParameter("id", book.getGenre().getId())
-                .getSingleResult());
+                .getSingleResult();
     }
 
     @Override
