@@ -1,11 +1,10 @@
 package ru.otus.homework06.dao;
 
 import lombok.AllArgsConstructor;
-import org.springframework.jdbc.core.RowMapper;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
+import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
 
 import javax.persistence.EntityManager;
@@ -23,10 +22,6 @@ public class BookDaoJpa implements BookDao {
 
     @PersistenceContext
     private EntityManager em;
-
-    private final NamedParameterJdbcOperations jdbcOperations;
-
-    private final RowMapper<Book> bookMapper;
 
     @Override
     public int count() {
@@ -64,6 +59,13 @@ public class BookDaoJpa implements BookDao {
         return em.createQuery("select b from Book b where genre_id = :genreId", Book.class).
                 setParameter("genreId", genre.getId()).
                 getResultList();
+    }
+
+    @Override
+    public Book getByComment(Comment comment) {
+        return em.createQuery("select b from Book b where id = :id", Book.class).
+                setParameter("id", comment.getBook().getId()).
+                getSingleResult();
     }
 
     @Override

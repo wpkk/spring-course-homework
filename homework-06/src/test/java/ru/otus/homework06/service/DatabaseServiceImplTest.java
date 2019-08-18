@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Import;
 import ru.otus.homework06.dao.AuthorDaoJpa;
 import ru.otus.homework06.dao.BookDaoJpa;
 import ru.otus.homework06.dao.GenreDaoJpa;
-import ru.otus.homework06.dao.mappers.AuthorMapper;
-import ru.otus.homework06.dao.mappers.BookMapper;
-import ru.otus.homework06.dao.mappers.GenreMapper;
 import ru.otus.homework06.domain.Book;
 
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@Import({DatabaseServiceImpl.class, BookDaoJpa.class, BookMapper.class, AuthorDaoJpa.class, AuthorMapper.class, GenreDaoJpa.class, GenreMapper.class})
+@Import({DatabaseServiceImpl.class, BookDaoJpa.class, AuthorDaoJpa.class, GenreDaoJpa.class})
 @DisplayName("Class DatabaseServiceImpl")
 class DatabaseServiceImplTest {
 

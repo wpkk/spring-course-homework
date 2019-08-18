@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.homework06.dao.AuthorDao;
 import ru.otus.homework06.dao.BookDao;
+import ru.otus.homework06.dao.CommentDao;
 import ru.otus.homework06.dao.GenreDao;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
+import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
@@ -20,6 +22,8 @@ public class DatabaseServiceImpl implements DatabaseService {
     private AuthorDao authorDao;
 
     private GenreDao genreDao;
+
+    private CommentDao commentDao;
 
     @Override
     public List<Book> getAllBooks() {
@@ -120,6 +124,10 @@ public class DatabaseServiceImpl implements DatabaseService {
         genreDao.insert(genre);
     }
 
+    @Override
+    public void addComment(Comment comment) {
+        commentDao.insert(comment);
+    }
     @Override
     public void deleteBook(int id) {
         if (bookDao.deleteById(id) == 0)

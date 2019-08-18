@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
+import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
@@ -138,6 +139,19 @@ public class LibraryServiceImpl implements LibraryService {
         Genre genre = new Genre();
         genre.setGenre(genreValue);
         databaseService.addGenre(genre);
+    }
+
+    @Override
+    public void addComment() {
+        consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_TITLE);
+        String title = consoleService.readMessage();
+        consoleService.writeLocalizedMessage(MESSAGE_ENTER_GENRE);
+        String commentValue = consoleService.readMessage();
+        Book book = databaseService.getBookByTitle(title);
+        Comment comment = new Comment();
+        comment.setComment(commentValue);
+        comment.setBook(book);
+        databaseService.addComment(comment);
     }
 
     @Override

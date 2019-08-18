@@ -79,6 +79,30 @@ public class LibraryUserCommands {
         }
     }
 
+//    @ShellMethod(key = {"comments"}, value = "Prints comments")
+//    public void comments(@ShellOption(value = {"-b", "--book"}, help = "Filters genres by book title and prints complete title info", defaultValue = ShellOption.NULL) String bookTitle) {
+//        try {
+//            if (bookTitle != null)
+//                libraryService.getCommentsByBook(bookTitle);
+//            else
+//                libraryService.getAllComments();
+//            }
+//        } catch (EmptyResultDataAccessException e) {
+//            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
+//        }
+//    }
+
+    @ShellMethod(key = {"add-comment"}, value = "Adds comments")
+    public void addComment() {
+        try {
+            libraryService.addComment();
+        } catch (EmptyResultDataAccessException e) {
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
+        }
+    }
+
+
+
     private boolean checkForMutualExclusivity(List<String> mutuallyExclusiveParameters) {
         if (mutuallyExclusiveParameters.stream().filter(Objects::nonNull).count() > 1) {
             consoleService.writeLocalizedMessage(MESSAGE_EXCESSIVE_SEARCH_CRITERIA);

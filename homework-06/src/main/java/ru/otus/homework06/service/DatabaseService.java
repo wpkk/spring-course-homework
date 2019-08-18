@@ -2,6 +2,7 @@ package ru.otus.homework06.service;
 
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
+import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
 
 import java.util.List;
@@ -46,6 +47,8 @@ public interface DatabaseService {
     void addAuthor(Author author);
 
     void addGenre(Genre genre);
+
+    void addComment(Comment comment);
 
     void deleteBook(int id);
 

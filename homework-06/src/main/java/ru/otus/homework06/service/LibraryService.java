@@ -32,6 +32,8 @@ public interface LibraryService {
 
     void addGenre();
 
+    void addComment();
+
     void deleteBook(int id);
 
     void deleteAuthor(int id);
