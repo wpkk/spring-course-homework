@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.EmptyResultDataAccessException;
-import ru.otus.homework06.dao.mappers.AuthorMapper;
-import ru.otus.homework06.dao.mappers.BookMapper;
-import ru.otus.homework06.dao.mappers.GenreMapper;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 
@@ -19,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
-@Import({BookDaoJpa.class, BookMapper.class, AuthorDaoJpa.class, AuthorMapper.class, GenreDaoJpa.class, GenreMapper.class})
+@Import({BookDaoJpa.class, AuthorDaoJpa.class, GenreDaoJpa.class})
 @DisplayName("Class BookDaoJdbc")
 class BookDaoJpaTest {
 
