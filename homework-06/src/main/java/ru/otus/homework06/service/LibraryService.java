@@ -44,4 +44,7 @@ public interface LibraryService {
 
     void getAuthorsDiedBeforeAgeOf(String age);
 
+    void getAllComments();
+
+    void getCommentsByBook(String bookTitle);
 }

@@ -26,6 +26,7 @@ public class LibraryServiceImpl implements LibraryService {
     private static final String MESSAGE_ENTER_AUTHOR_BIRTH_DEATH = "message.enterAuthorBirthDeath";
     private static final String MESSAGE_ENTER_GENRE = "message.enterGenre";
     private static final String MESSAGE_EMPTY_RESULT_SET = "message.EmptyResultSet";
+    private static final String MESSAGE_ENTER_COMMENT = "message.enterComment";
 
     @Override
     public void getAllBooks() {
@@ -145,9 +146,9 @@ public class LibraryServiceImpl implements LibraryService {
     public void addComment() {
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_TITLE);
         String title = consoleService.readMessage();
-        consoleService.writeLocalizedMessage(MESSAGE_ENTER_GENRE);
-        String commentValue = consoleService.readMessage();
         Book book = databaseService.getBookByTitle(title);
+        consoleService.writeLocalizedMessage(MESSAGE_ENTER_COMMENT);
+        String commentValue = consoleService.readMessage();
         Comment comment = new Comment();
         comment.setComment(commentValue);
         comment.setBook(book);
@@ -179,6 +180,16 @@ public class LibraryServiceImpl implements LibraryService {
         printAuthors(databaseService.getAllAuthors().stream().filter(x -> x.getDeath().getValue() - x.getBirth().getValue() < Integer.valueOf(age)).collect(Collectors.toList()));
     }
 
+    @Override
+    public void getAllComments() {
+        printComments(databaseService.getAllComments());
+    }
+
+    @Override
+    public void getCommentsByBook(String bookTitle) {
+        printComments(databaseService.getCommentByBook(bookTitle));
+    }
+
     private void printBooks(List<Book> books) {
         if (!(books).isEmpty()) {
             String joinedBooks = books.stream().map(Book::getTitle).collect(Collectors.joining(", "));
@@ -192,6 +203,15 @@ public class LibraryServiceImpl implements LibraryService {
         if (!(authors).isEmpty()) {
             String joinedAuthors = authors.stream().map(x -> x.getName() + " " + x.getSurname()).collect(Collectors.joining(", "));
             consoleService.writeMessage(joinedAuthors);
+        } else {
+            consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
+        }
+    }
+
+    private void printComments(List<Comment> comments) {
+        if (!(comments).isEmpty()) {
+            String joinedComments = comments.stream().map(Comment::getComment).collect(Collectors.joining(", "));
+            consoleService.writeMessage(joinedComments);
         } else {
             consoleService.writeLocalizedMessage(MESSAGE_EMPTY_RESULT_SET);
         }

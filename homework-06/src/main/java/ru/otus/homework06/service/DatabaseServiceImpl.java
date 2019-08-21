@@ -70,6 +70,17 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
+    public List<Comment> getAllComments() {
+        return commentDao.getAll();
+    }
+
+    @Override
+    public List<Comment> getCommentByBook(String bookTitle) {
+        Book book = bookDao.getByTitle(bookTitle);
+        return commentDao.getByBook(book);
+    }
+
+    @Override
     public int countBooks() {
         return bookDao.count();
     }
@@ -145,4 +156,6 @@ public class DatabaseServiceImpl implements DatabaseService {
         if (genreDao.deleteById(id) == 0)
             throw new IllegalArgumentException();
     }
+
+
 }

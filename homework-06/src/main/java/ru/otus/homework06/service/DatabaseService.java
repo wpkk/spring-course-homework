@@ -55,4 +55,8 @@ public interface DatabaseService {
     void deleteAuthor(int id);
 
     void deleteGenre(int id);
+
+    List<Comment> getAllComments();
+
+    List<Comment> getCommentByBook(String bookTitle);
 }

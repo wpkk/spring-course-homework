@@ -8,11 +8,12 @@ import ru.otus.homework06.domain.Comment;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
 @AllArgsConstructor
-public class CommentDaoImpl implements CommentDao {
+public class CommentDaoJpa implements CommentDao {
 
     @PersistenceContext
     private EntityManager em;
@@ -23,9 +24,16 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public Comment getByBook(Book book) {
-        return em.createQuery("select c from Comment where book_id = :bookId", Comment.class).
+    public List<Comment> getByBook(Book book) {
+        return em.createQuery("select c from Comment c where book_id = :bookId", Comment.class).
                 setParameter("bookId", book.getId()).
-                getSingleResult();
+                getResultList();
     }
+
+    @Override
+    public List<Comment> getAll() {
+        return em.createQuery("select c from Comment c", Comment.class).
+                getResultList();
+    }
+
 }

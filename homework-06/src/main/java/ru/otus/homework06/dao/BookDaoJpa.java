@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import org.springframework.stereotype.Repository;
-import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
 
 import javax.persistence.EntityManager;
@@ -12,8 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
-@SuppressWarnings("ConstantConditions")
 
 @Repository
 @Transactional
@@ -59,13 +56,6 @@ public class BookDaoJpa implements BookDao {
         return em.createQuery("select b from Book b where genre_id = :genreId", Book.class).
                 setParameter("genreId", genre.getId()).
                 getResultList();
-    }
-
-    @Override
-    public Book getByComment(Comment comment) {
-        return em.createQuery("select b from Book b where id = :id", Book.class).
-                setParameter("id", comment.getBook().getId()).
-                getSingleResult();
     }
 
     @Override
