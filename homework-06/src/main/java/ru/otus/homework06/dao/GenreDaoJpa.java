@@ -54,10 +54,9 @@ public class GenreDaoJpa implements GenreDao {
     }
 
     @Override
-    public int deleteById(int id) {
+    public void deleteById(int id) {
         Genre genre = em.find(Genre.class, id);
         em.remove(genre);
-        return 1;
     }
 
 }

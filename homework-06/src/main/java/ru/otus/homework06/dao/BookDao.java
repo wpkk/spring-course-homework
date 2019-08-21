@@ -23,6 +23,6 @@ public interface BookDao {
 
     void insert(Book book);
 
-    int deleteById(int id);
+    void deleteById(int id);
 
 }

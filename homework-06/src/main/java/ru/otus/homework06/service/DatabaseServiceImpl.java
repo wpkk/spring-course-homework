@@ -141,20 +141,17 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
     @Override
     public void deleteBook(int id) {
-        if (bookDao.deleteById(id) == 0)
-            throw new IllegalArgumentException();
+        bookDao.deleteById(id);
     }
 
     @Override
     public void deleteAuthor(int id) {
-        if (authorDao.deleteById(id) == 0)
-            throw new IllegalArgumentException();
+        authorDao.deleteById(id);
     }
 
     @Override
     public void deleteGenre(int id) {
-        if (genreDao.deleteById(id) == 0)
-            throw new IllegalArgumentException();
+        genreDao.deleteById(id);
     }
 
 

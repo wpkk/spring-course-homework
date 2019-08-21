@@ -2,6 +2,7 @@ package ru.otus.homework06.shell;
 
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -77,7 +78,7 @@ public class LibraryAdminCommands {
                 default:
                     consoleService.writeLocalizedMessage(MESSAGE_WRONG_ENTITY_TYPE);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidDataAccessApiUsageException e) {
             consoleService.writeLocalizedMessage(MESSAGE_NO_ROWS_DELETED);
         }
     }

@@ -22,6 +22,6 @@ public interface AuthorDao {
 
     void insert(Author author);
 
-    int deleteById(int id);
+    void deleteById(int id);
 
 }

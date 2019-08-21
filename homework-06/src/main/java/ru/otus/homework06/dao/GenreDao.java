@@ -20,6 +20,6 @@ public interface GenreDao {
 
     void insert(Genre genre);
 
-    int deleteById(int id);
+    void deleteById(int id);
 
 }

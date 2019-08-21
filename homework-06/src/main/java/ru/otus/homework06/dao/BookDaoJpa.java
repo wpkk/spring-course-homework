@@ -64,9 +64,8 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public int deleteById(int id) {
+    public void deleteById(int id) {
         Book book = em.find(Book.class, id);
         em.remove(book);
-        return 1;
     }
 }

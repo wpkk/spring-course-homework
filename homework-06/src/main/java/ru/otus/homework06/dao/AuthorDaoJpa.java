@@ -63,9 +63,8 @@ public class AuthorDaoJpa implements AuthorDao {
     }
 
     @Override
-    public int deleteById(int id) {
+    public void deleteById(int id) {
         Author author = em.find(Author.class, id);
         em.remove(author);
-        return 1;
     }
 }
