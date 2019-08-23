@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2019-08-23--0001--authors
+      author: wpkk
+      createTable:
+        tableName: authors
+        columns:
+          - column:
+              name: id
+              type: int
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_authors
+          - column:
+              name: name
+              type: varchar(255)
+          - column:
+              name: surname
+              type: varchar(255)
+          - column:
+              name: year_birth
+              type: int
+          - column:
+              name: year_death
+              type: int

@@ -8,3 +8,6 @@ spring:
   messages:
     basename: i18n/bundle
     encoding: UTF-8
+  liquibase:
+    enabled: true
+
