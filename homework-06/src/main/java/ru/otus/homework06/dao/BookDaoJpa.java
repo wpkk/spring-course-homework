@@ -27,7 +27,7 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public Optional<Book> getById(int id) {
+    public Optional<Book> getById(long id) {
         return Optional.ofNullable(em.find(Book.class, id));
     }
 
@@ -64,7 +64,7 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         Book book = em.find(Book.class, id);
         em.remove(book);
     }

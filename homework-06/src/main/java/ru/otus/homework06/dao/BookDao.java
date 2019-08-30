@@ -11,7 +11,7 @@ public interface BookDao {
 
     int count();
 
-    Optional<Book> getById(int id);
+    Optional<Book> getById(long id);
 
     Book getByTitle(String title);
 
@@ -23,6 +23,6 @@ public interface BookDao {
 
     void insert(Book book);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
 }

@@ -28,7 +28,7 @@ public class LibraryAdminCommands {
 
     @ShellMethod(key = {"id", "get-by-id"}, value = "Gets entity by its id. Book is the default entity.")
     public void getById(@ShellOption(value = {"-t", "--entity-type"}, defaultValue = "book", help = "Specifies the entity type book/author/genre.") String entityType,
-                        @ShellOption(value = "-v", defaultValue = ShellOption.NONE, help = "Specifies the id to search for.") int value) {
+                        @ShellOption(value = "-v", defaultValue = ShellOption.NONE, help = "Specifies the id to search for.") long value) {
         try {
             switch (entityType) {
                 case "book": libraryService.getBookById(value);
@@ -63,7 +63,7 @@ public class LibraryAdminCommands {
 
     @ShellMethod(key = {"del", "delete", "delete-entity"}, value = "Removes entity of specified type. Book is the default type.")
     public void deleteEntity(@ShellOption(value = {"-t", "--entity-type"}, defaultValue = "book", help = "Specifies the entity type book/author/genre.") String entityType,
-                             @ShellOption(value = "-v", defaultValue = ShellOption.NONE, help = "Specifies the id to search for.") int value) {
+                             @ShellOption(value = "-v", defaultValue = ShellOption.NONE, help = "Specifies the id to search for.") long value) {
         try {
             switch (entityType) {
                 case "book":

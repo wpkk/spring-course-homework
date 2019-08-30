@@ -12,7 +12,7 @@ public interface DatabaseService {
 
     List<Book> getAllBooks();
 
-    Optional<Book> getBookById(int id);
+    Optional<Book> getBookById(long id);
 
     Book getBookByTitle(String title);
 
@@ -22,7 +22,7 @@ public interface DatabaseService {
 
     List<Author> getAllAuthors();
 
-    Optional<Author> getAuthorById(int id);
+    Optional<Author> getAuthorById(long id);
 
     Author getAuthorByBook(String bookTitle);
 
@@ -30,7 +30,7 @@ public interface DatabaseService {
 
     List<Genre> getAllGenres();
 
-    Optional<Genre> getGenreById(int id);
+    Optional<Genre> getGenreById(long id);
 
     Genre getGenreByBook(String bookTitle);
 
@@ -50,11 +50,11 @@ public interface DatabaseService {
 
     void addComment(Comment comment);
 
-    void deleteBook(int id);
+    void deleteBook(long id);
 
-    void deleteAuthor(int id);
+    void deleteAuthor(long id);
 
-    void deleteGenre(int id);
+    void deleteGenre(long id);
 
     List<Comment> getAllComments();
 

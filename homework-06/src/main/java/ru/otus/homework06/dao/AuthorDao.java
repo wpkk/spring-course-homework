@@ -10,7 +10,7 @@ public interface AuthorDao {
 
     int count();
 
-    Optional<Author> getById(int id);
+    Optional<Author> getById(long id);
 
     Author getBySurname(String surname);
 
@@ -22,6 +22,6 @@ public interface AuthorDao {
 
     void insert(Author author);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
 }

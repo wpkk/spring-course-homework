@@ -4,7 +4,7 @@ public interface LibraryService {
 
     void getAllBooks();
 
-    void getBookById(int id);
+    void getBookById(long id);
 
     void getBookByTitle(String title);
 
@@ -16,13 +16,13 @@ public interface LibraryService {
 
     void getAuthorByBook(String bookTitle);
 
-    void getAuthorById(int id);
+    void getAuthorById(long id);
 
     void getAllGenres();
 
     void getGenreByBook(String bookTitle);
 
-    void getGenreById(int id);
+    void getGenreById(long id);
 
     void countEntities();
 
@@ -34,11 +34,11 @@ public interface LibraryService {
 
     void addComment();
 
-    void deleteBook(int id);
+    void deleteBook(long id);
 
-    void deleteAuthor(int id);
+    void deleteAuthor(long id);
 
-    void deleteGenre(int id);
+    void deleteGenre(long id);
 
     void getAuthorsBornBefore(String year);
 

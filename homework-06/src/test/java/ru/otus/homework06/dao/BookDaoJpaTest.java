@@ -45,8 +45,8 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should get correct book by id")
     void shouldGetCorrectBookById() {
-        Optional<Book> actualBook = bookDao.getById(2);
-        Book expectedBook = em.find(Book.class, 2);
+        Optional<Book> actualBook = bookDao.getById(2L);
+        Book expectedBook = em.find(Book.class, 2L);
         assertThat(actualBook).isPresent().get().isEqualToComparingFieldByField(expectedBook);
     }
 

@@ -10,7 +10,7 @@ public interface GenreDao {
 
     int count();
 
-    Optional<Genre> getById(int id);
+    Optional<Genre> getById(long id);
 
     Genre getByGenre(String genre);
 
@@ -20,6 +20,6 @@ public interface GenreDao {
 
     void insert(Genre genre);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
 }

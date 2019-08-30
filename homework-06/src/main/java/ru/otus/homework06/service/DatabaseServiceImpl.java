@@ -96,17 +96,17 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public Optional<Book> getBookById(int id) {
+    public Optional<Book> getBookById(long id) {
         return bookDao.getById(id);
     }
 
     @Override
-    public Optional<Author> getAuthorById(int id) {
+    public Optional<Author> getAuthorById(long id) {
         return authorDao.getById(id);
     }
 
     @Override
-    public Optional<Genre> getGenreById(int id) {
+    public Optional<Genre> getGenreById(long id) {
         return genreDao.getById(id);
     }
 
@@ -140,17 +140,17 @@ public class DatabaseServiceImpl implements DatabaseService {
         commentDao.insert(comment);
     }
     @Override
-    public void deleteBook(int id) {
+    public void deleteBook(long id) {
         bookDao.deleteById(id);
     }
 
     @Override
-    public void deleteAuthor(int id) {
+    public void deleteAuthor(long id) {
         authorDao.deleteById(id);
     }
 
     @Override
-    public void deleteGenre(int id) {
+    public void deleteGenre(long id) {
         genreDao.deleteById(id);
     }
 

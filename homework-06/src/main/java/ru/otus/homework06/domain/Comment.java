@@ -13,7 +13,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Getter @Setter
-    private int id;
+    private long id;
 
     @Getter @Setter
     private String comment;

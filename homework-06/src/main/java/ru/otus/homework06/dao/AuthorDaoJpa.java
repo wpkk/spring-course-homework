@@ -26,7 +26,7 @@ public class AuthorDaoJpa implements AuthorDao {
     }
 
     @Override
-    public Optional<Author> getById(int id) {
+    public Optional<Author> getById(long id) {
         return Optional.ofNullable(em.find(Author.class, id));
     }
 
@@ -63,7 +63,7 @@ public class AuthorDaoJpa implements AuthorDao {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         Author author = em.find(Author.class, id);
         em.remove(author);
     }

@@ -86,19 +86,19 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void getBookById(int id) {
+    public void getBookById(long id) {
         Book book = databaseService.getBookById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(book);
     }
 
     @Override
-    public void getAuthorById(int id) {
+    public void getAuthorById(long id) {
         Author author = databaseService.getAuthorById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(author);
     }
 
     @Override
-    public void getGenreById(int id) {
+    public void getGenreById(long id) {
         Genre genre = databaseService.getGenreById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         consoleService.writeMessage(genre);
     }
@@ -156,17 +156,17 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void deleteBook(int id) {
+    public void deleteBook(long id) {
         databaseService.deleteBook(id);
     }
 
     @Override
-    public void deleteAuthor(int id) {
+    public void deleteAuthor(long id) {
         databaseService.deleteAuthor(id);
     }
 
     @Override
-    public void deleteGenre(int id) {
+    public void deleteGenre(long id) {
         databaseService.deleteGenre(id);
     }
 
