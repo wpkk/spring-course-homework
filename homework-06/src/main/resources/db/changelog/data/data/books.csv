@@ -1,0 +1,4 @@
+id,title,author_id,genre_id
+NULL,'title1',2,3
+NULL,'title2',1,4
+NULL,'title3',1,2

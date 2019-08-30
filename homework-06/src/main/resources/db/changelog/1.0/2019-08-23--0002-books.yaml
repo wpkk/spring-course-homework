@@ -1,9 +1,9 @@
 databaseChangeLog:
   - changeSet:
-      id: 2019-08-23--0001--authors
+      id: 2019-08-23--0002--books
       author: wpkk
       createTable:
-        tableName: authors
+        tableName: books
         columns:
           - column:
               name: id
@@ -12,21 +12,26 @@ databaseChangeLog:
               constraints:
                 nullable: false
                 primaryKey: true
-                primaryKeyName: pk_authors
+                primaryKeyName: pk_books
           - column:
-              name: name
+              name: title
               type: varchar(255)
           - column:
-              name: surname
-              type: varchar(255)
-          - column:
-              name: year_birth
+              name: author_id
               type: int
+              constraints:
+                nullable: false
+                foreignKeyName: fk_books_authors
+                references: authors(id)
           - column:
-              name: year_death
+              name: genre_id
               type: int
+              constraints:
+                nullable: false
+                foreignKeyName: fk_books_genres
+                references: genres(id)
       addAutoIncrement:
-        tableName: authors
+        tableName: books
         columnName: id
         columnDataType: int
         incrementBy: 1
