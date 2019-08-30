@@ -5,3 +5,5 @@ spring:
   shell:
     interactive:
       enabled: false
+  liquibase:
+    enabled: false

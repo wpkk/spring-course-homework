@@ -27,8 +27,4 @@ class LibraryServiceImplTest {
         libraryService.getAllBooks();
         verify(consoleService, times(1)).writeMessage(ALL_TITLES);
     }
-
-
-
-
 }

@@ -177,7 +177,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void getAuthorsDiedBeforeAgeOf(String age) {
-        printAuthors(databaseService.getAllAuthors().stream().filter(x -> x.getDeath().getValue() - x.getBirth().getValue() < Integer.valueOf(age)).collect(Collectors.toList()));
+        printAuthors(databaseService.getAllAuthors().stream().filter(x -> x.getDeath().getValue() - x.getBirth().getValue() < Integer.parseInt(age)).collect(Collectors.toList()));
     }
 
     @Override
