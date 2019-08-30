@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 2019-08-23--0001--authors
+      id: 2019-08-23--0003--authors
       author: wpkk
       createTable:
         tableName: authors
@@ -25,3 +25,9 @@ databaseChangeLog:
           - column:
               name: year_death
               type: int
+      addAutoIncrement:
+        tableName: authors
+        columnName: id
+        columnDataType: int
+        incrementBy: 1
+        startWith: 1

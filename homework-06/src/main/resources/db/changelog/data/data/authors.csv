@@ -1,4 +1,4 @@
 id,name,surname,year_birth,year_death
-default,'name1','author1','197000','2000'
-default,'name2','author2','1973','2003'
-default,'name3','author3','1975','2005'
+NULL,'name1','author1','197000','2000'
+NULL,'name2','author2','1973','2003'
+NULL,'name3','author3','1975','2005'
