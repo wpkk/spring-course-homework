@@ -1,9 +1,9 @@
 databaseChangeLog:
   - changeSet:
-      id: 2019-08-23--0002--books
+      id: 2019-08-23--0001--authors
       author: wpkk
       createTable:
-        tableName: books
+        tableName: comments
         columns:
           - column:
               name: id
@@ -12,28 +12,20 @@ databaseChangeLog:
               constraints:
                 nullable: false
                 primaryKey: true
-                primaryKeyName: pk_books
+                primaryKeyName: pk_comments
           - column:
-              name: title
+              name: comment
               type: varchar(255)
           - column:
-              name: author_id
+              name: book_id
               type: int
               constraints:
                 nullable: false
-                foreignKeyName: fk_books_authors
-                references: authors(id)
-                deleteCascade: true
-          - column:
-              name: genre_id
-              type: int
-              constraints:
-                nullable: false
-                foreignKeyName: fk_books_genres
-                references: genres(id)
+                foreignKeyName: fk_comments_books
+                references: books(id)
                 deleteCascade: true
       addAutoIncrement:
-        tableName: books
+        tableName: comments
         columnName: id
         columnDataType: int
         incrementBy: 1
