@@ -3,7 +3,6 @@ package ru.otus.homework06.dao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -18,6 +17,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @DataJpaTest
 @Import({BookDaoJpa.class, AuthorDaoJpa.class, GenreDaoJpa.class})
@@ -26,11 +26,10 @@ class BookDaoJpaTest {
 
     private final static long BOOK_ID = 2L;
     private final static int BOOK_COUNT = 3;
-    private final static int AUTHOR_ID = 1;
+    private final static long AUTHOR_ID = 1;
     private final static int BOOKS_FOR_AUTHOR_ONE = 2;
     private final static Year YEAR_BIRTH = Year.of(1970);
     private final static Year YEAR_DEATH = Year.of(2000);
-
 
     @Autowired
     private BookDao bookDao;
@@ -68,7 +67,7 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should return books by specific author")
     void shouldReturnBooksBySpecificAuthor() {
-        Author author = new Author(AUTHOR_ID, "name1", "author1", YEAR_BIRTH, YEAR_DEATH);
+        when(author.getId()).thenReturn(AUTHOR_ID);
         List<Book> books = bookDao.getByAuthor(author);
         assertThat(books).hasSize(BOOKS_FOR_AUTHOR_ONE).allMatch(b -> b.getAuthor().getId() == AUTHOR_ID &&
                 b.getAuthor().getBirth().equals(YEAR_BIRTH) &&
@@ -81,10 +80,9 @@ class BookDaoJpaTest {
 
         Book book = new Book(0, "test", author, genre);
         bookDao.insert(book);
-        System.out.println(book.getId());
         assertThat(book.getId()).isGreaterThan(0);
 
-        Mockito.when(author.getName()).thenReturn("test_name");
+        when(author.getName()).thenReturn("test_name");
 
         Book actualBook = em.find(Book.class, book.getId());
         assertThat(actualBook).isNotNull().matches(b -> !b.getTitle().equals(""))
