@@ -24,6 +24,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Class BookDaoJdbc")
 class BookDaoJpaTest {
 
+    private final static long BOOK_ID = 2L;
+    private final static int BOOK_COUNT = 3;
+    private final static int AUTHOR_ID = 1;
+    private final static int BOOKS_FOR_AUTHOR_ONE = 2;
+    private final static Year YEAR_BIRTH = Year.of(1970);
+    private final static Year YEAR_DEATH = Year.of(2000);
+
+
     @Autowired
     private BookDao bookDao;
 
@@ -39,14 +47,14 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should return correct number of books")
     void shouldReturnCorrectNumberOfBooks() {
-        assertEquals(3, bookDao.count());
+        assertEquals(BOOK_COUNT, bookDao.count());
     }
 
     @Test
     @DisplayName("Should get correct book by id")
     void shouldGetCorrectBookById() {
-        Optional<Book> actualBook = bookDao.getById(2L);
-        Book expectedBook = em.find(Book.class, 2L);
+        Optional<Book> actualBook = bookDao.getById(BOOK_ID);
+        Book expectedBook = em.find(Book.class, BOOK_ID);
         assertThat(actualBook).isPresent().get().isEqualToComparingFieldByField(expectedBook);
     }
 
@@ -54,15 +62,17 @@ class BookDaoJpaTest {
     @DisplayName("Should return all the books")
     void shouldReturnAllTheBooks() {
         List<Book> books = bookDao.getAll();
-        assertThat(books).hasSize(3);
+        assertThat(books).hasSize(BOOK_COUNT);
     }
 
     @Test
     @DisplayName("Should return books by specific author")
     void shouldReturnBooksBySpecificAuthor() {
-        Author author = new Author(1, "name1", "author1", Year.of(1970), Year.of(2000));
+        Author author = new Author(AUTHOR_ID, "name1", "author1", YEAR_BIRTH, YEAR_DEATH);
         List<Book> books = bookDao.getByAuthor(author);
-        assertThat(books).hasSize(2).allMatch(b -> b.getAuthor().getId() == 1);
+        assertThat(books).hasSize(BOOKS_FOR_AUTHOR_ONE).allMatch(b -> b.getAuthor().getId() == AUTHOR_ID &&
+                b.getAuthor().getBirth().equals(YEAR_BIRTH) &&
+                b.getAuthor().getDeath().equals(YEAR_DEATH));
     }
 
     @Test
