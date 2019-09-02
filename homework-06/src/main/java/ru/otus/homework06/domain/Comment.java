@@ -5,6 +5,12 @@ import ru.otus.homework06.domain.partial.BookTitle;
 
 import javax.persistence.*;
 
+@NamedEntityGraph(
+        name = "comments-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("bookTitle"),
+        }
+)
 @Entity
 @Table(name = "comments")
 @AllArgsConstructor @NoArgsConstructor
