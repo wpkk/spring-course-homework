@@ -7,6 +7,7 @@ import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import java.util.List;
 import java.time.Year;
@@ -146,12 +147,12 @@ public class LibraryServiceImpl implements LibraryService {
     public void addComment() {
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_BOOK_TITLE);
         String title = consoleService.readMessage();
-        Book book = databaseService.getBookByTitle(title);
+        BookTitle bookTitle = databaseService.getBookTitleByTitle(title);
         consoleService.writeLocalizedMessage(MESSAGE_ENTER_COMMENT);
         String commentValue = consoleService.readMessage();
         Comment comment = new Comment();
         comment.setComment(commentValue);
-        comment.setBook(book);
+        comment.setBookTitle(bookTitle);
         databaseService.addComment(comment);
     }
 

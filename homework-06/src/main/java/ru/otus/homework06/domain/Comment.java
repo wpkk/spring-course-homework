@@ -1,6 +1,7 @@
 package ru.otus.homework06.domain;
 
 import lombok.*;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import javax.persistence.*;
 
@@ -17,10 +18,10 @@ public class Comment {
 
     @Getter @Setter
     private String comment;
-
+    
     @Getter @Setter
-    @ManyToOne(targetEntity = Book.class)
+    @ManyToOne(targetEntity = BookTitle.class)
     @JoinColumn(name = "book_id")
-    private Book book;
+    private BookTitle bookTitle;
 
 }

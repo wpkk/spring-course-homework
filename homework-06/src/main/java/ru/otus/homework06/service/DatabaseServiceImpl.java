@@ -10,6 +10,7 @@ import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import java.util.List;
 import java.util.Optional;
@@ -76,8 +77,13 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public List<Comment> getCommentByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle);
-        return commentDao.getByBook(book);
+        BookTitle bookTitleObject = bookDao.getBookTitleByTitle(bookTitle);
+        return commentDao.getByBookTitle(bookTitleObject);
+    }
+
+    @Override
+    public BookTitle getBookTitleByTitle(String title) {
+        return bookDao.getBookTitleByTitle(title);
     }
 
     @Override

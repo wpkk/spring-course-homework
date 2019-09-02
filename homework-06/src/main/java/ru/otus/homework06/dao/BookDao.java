@@ -3,6 +3,7 @@ package ru.otus.homework06.dao;
 import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Genre;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,4 +26,5 @@ public interface BookDao {
 
     void deleteById(long id);
 
+    BookTitle getBookTitleByTitle(String title);
 }

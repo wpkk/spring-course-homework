@@ -2,8 +2,8 @@ package ru.otus.homework06.dao;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Comment;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,9 +24,9 @@ public class CommentDaoJpa implements CommentDao {
     }
 
     @Override
-    public List<Comment> getByBook(Book book) {
+    public List<Comment> getByBookTitle(BookTitle bookTitle) {
         return em.createQuery("select c from Comment c where book_id = :bookId", Comment.class).
-                setParameter("bookId", book.getId()).
+                setParameter("bookId", bookTitle.getId()).
                 getResultList();
     }
 

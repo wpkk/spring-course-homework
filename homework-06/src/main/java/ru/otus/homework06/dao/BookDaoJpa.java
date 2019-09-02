@@ -5,6 +5,7 @@ import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import org.springframework.stereotype.Repository;
 import ru.otus.homework06.domain.Genre;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -67,5 +68,12 @@ public class BookDaoJpa implements BookDao {
     public void deleteById(long id) {
         Book book = em.find(Book.class, id);
         em.remove(book);
+    }
+
+    @Override
+    public BookTitle getBookTitleByTitle(String title) {
+        return em.createQuery("select bt from BookTitle bt where title = :title", BookTitle.class).
+                setParameter("title", title).
+                getSingleResult();
     }
 }

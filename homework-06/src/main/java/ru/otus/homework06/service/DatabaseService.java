@@ -4,6 +4,7 @@ import ru.otus.homework06.domain.Author;
 import ru.otus.homework06.domain.Book;
 import ru.otus.homework06.domain.Comment;
 import ru.otus.homework06.domain.Genre;
+import ru.otus.homework06.domain.partial.BookTitle;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,4 +60,6 @@ public interface DatabaseService {
     List<Comment> getAllComments();
 
     List<Comment> getCommentByBook(String bookTitle);
+
+    BookTitle getBookTitleByTitle(String title);
 }
