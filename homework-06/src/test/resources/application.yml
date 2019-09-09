@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    initialization-mode: always
+    data: test-data.sql
+  shell:
+    interactive:
+      enabled: false
+  liquibase:
+    enabled: false

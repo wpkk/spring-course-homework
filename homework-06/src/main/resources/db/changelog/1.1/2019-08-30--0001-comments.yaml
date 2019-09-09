@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2019-08-23--0001--authors
+      author: wpkk
+      createTable:
+        tableName: comments
+        columns:
+          - column:
+              name: id
+              type: int
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_comments
+          - column:
+              name: comment
+              type: varchar(255)
+          - column:
+              name: book_id
+              type: int
+              constraints:
+                nullable: false
+                foreignKeyName: fk_comments_books
+                references: books(id)
+                deleteCascade: true
+      addAutoIncrement:
+        tableName: comments
+        columnName: id
+        columnDataType: int
+        incrementBy: 1
+        startWith: 1
