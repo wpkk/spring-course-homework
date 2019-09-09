@@ -25,11 +25,14 @@ import static org.mockito.Mockito.*;
 class BookDaoJpaTest {
 
     private final static long BOOK_ID = 2L;
+    private final static long DEFAULT_BOOK_ID = 0L;
     private final static int BOOK_COUNT = 3;
     private final static long AUTHOR_ID = 1;
     private final static int BOOKS_FOR_AUTHOR_ONE = 2;
     private final static Year YEAR_BIRTH = Year.of(1970);
     private final static Year YEAR_DEATH = Year.of(2000);
+    private final static String TEST_AUTHOR_NAME = "testName";
+    private final static String TEST_BOOK_TITLE = "testTitle";
 
     @Autowired
     private BookDao bookDao;
@@ -78,15 +81,15 @@ class BookDaoJpaTest {
     @DisplayName("Should correctly persist books")
     void shouldCorrectlyPersistBooks() {
 
-        Book book = new Book(0, "test", author, genre);
+        Book book = new Book(DEFAULT_BOOK_ID, TEST_BOOK_TITLE, author, genre);
         bookDao.insert(book);
-        assertThat(book.getId()).isGreaterThan(0);
+        assertThat(book.getId()).isGreaterThan(DEFAULT_BOOK_ID);
 
-        when(author.getName()).thenReturn("test_name");
+        when(author.getName()).thenReturn(TEST_AUTHOR_NAME);
 
         Book actualBook = em.find(Book.class, book.getId());
         assertThat(actualBook).isNotNull().matches(b -> !b.getTitle().equals(""))
-                .matches(b -> b.getAuthor() != null && b.getAuthor().getName().equals("test_name"))
+                .matches(b -> b.getAuthor() != null && b.getAuthor().getName().equals(TEST_AUTHOR_NAME))
                 .matches(b -> b.getGenre() != null);
     }
 }
