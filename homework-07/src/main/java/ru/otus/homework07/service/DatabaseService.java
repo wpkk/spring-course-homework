@@ -4,7 +4,7 @@ import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
 import ru.otus.homework07.domain.Comment;
 import ru.otus.homework07.domain.Genre;
-import ru.otus.homework07.domain.partial.BookTitle;
+import ru.otus.homework07.domain.partial.PartialBook;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,11 +37,11 @@ public interface DatabaseService {
 
     Genre getGenreByGenre(String genre);
 
-    int countBooks();
+    long countBooks();
 
-    int countAuthors();
+    long countAuthors();
 
-    int countGenres();
+    long countGenres();
 
     void addBook(Book book);
 
@@ -61,5 +61,5 @@ public interface DatabaseService {
 
     List<Comment> getCommentByBook(String bookTitle);
 
-    BookTitle getBookTitleByTitle(String title);
+    PartialBook getPartialBookByTitle(String title);
 }

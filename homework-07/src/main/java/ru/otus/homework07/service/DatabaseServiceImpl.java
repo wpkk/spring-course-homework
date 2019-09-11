@@ -2,15 +2,12 @@ package ru.otus.homework07.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.homework07.dao.AuthorDao;
-import ru.otus.homework07.dao.BookDao;
-import ru.otus.homework07.dao.CommentDao;
-import ru.otus.homework07.dao.GenreDao;
 import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
 import ru.otus.homework07.domain.Comment;
 import ru.otus.homework07.domain.Genre;
-import ru.otus.homework07.domain.partial.BookTitle;
+import ru.otus.homework07.domain.partial.PartialBook;
+import ru.otus.homework07.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,147 +15,147 @@ import java.util.Optional;
 @Service @AllArgsConstructor
 public class DatabaseServiceImpl implements DatabaseService {
 
-    private BookDao bookDao;
+    private AuthorRepository authorRepository;
 
-    private AuthorDao authorDao;
+    private BookRepository bookRepository;
 
-    private GenreDao genreDao;
+    private PartialBookRepository partialBookRepository;
 
-    private CommentDao commentDao;
+    private GenreRepository genreRepository;
+
+    private CommentRepository commentRepository;
 
     @Override
     public List<Book> getAllBooks() {
-        return bookDao.getAll();
+        return bookRepository.findAll();
     }
 
     @Override
     public Book getBookByTitle(String title) {
-        return bookDao.getByTitle(title);
+        return bookRepository.getByTitle(title);
     }
 
     @Override
     public List<Book> getBooksByAuthor(String surname) {
-        Author author = authorDao.getBySurname(surname);
-        return bookDao.getByAuthor(author);
+        Author author = authorRepository.getBySurname(surname);
+        return bookRepository.getByAuthor(author);
     }
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
-        Genre genreObject = genreDao.getByGenre(genre);
-        return bookDao.getByGenre(genreObject);
+        Genre genreObject = genreRepository.getByGenre(genre);
+        return bookRepository.getByGenre(genreObject);
     }
 
     @Override
     public List<Author> getAllAuthors() {
-        return authorDao.getAll();
+        return authorRepository.findAll();
     }
 
     @Override
     public Author getAuthorByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle);
-        return authorDao.getByBook(book);
+        Book book = bookRepository.getByTitle(bookTitle);
+        return authorRepository.getByBook(book);
     }
 
     @Override
     public List<Genre> getAllGenres() {
-        return genreDao.getAll();
+        return genreRepository.findAll();
     }
 
     @Override
     public Genre getGenreByBook(String bookTitle) {
-        Book book = bookDao.getByTitle(bookTitle);
-        return genreDao.getByBook(book);
+        Book book = bookRepository.getByTitle(bookTitle);
+        return genreRepository.getByBook(book);
     }
 
     @Override
     public List<Comment> getAllComments() {
-        return commentDao.getAll();
+        return commentRepository.findAll();
     }
 
     @Override
     public List<Comment> getCommentByBook(String bookTitle) {
-        BookTitle bookTitleObject = bookDao.getBookTitleByTitle(bookTitle);
-        return commentDao.getByBookTitle(bookTitleObject);
+        PartialBook partialBookObject = partialBookRepository.getPartialBookByTitle(bookTitle);
+        return commentRepository.getByPartialBook(partialBookObject);
     }
 
     @Override
-    public BookTitle getBookTitleByTitle(String title) {
-        return bookDao.getBookTitleByTitle(title);
+    public PartialBook getPartialBookByTitle(String title) {
+        return partialBookRepository.getPartialBookByTitle(title);
     }
 
     @Override
-    public int countBooks() {
-        return bookDao.count();
+    public long countBooks() {
+        return bookRepository.count();
     }
 
     @Override
-    public int countAuthors() {
-        return authorDao.count();
+    public long countAuthors() {
+        return authorRepository.count();
     }
 
     @Override
-    public int countGenres() {
-        return genreDao.count();
+    public long countGenres() {
+        return genreRepository.count();
     }
 
     @Override
     public Optional<Book> getBookById(long id) {
-        return bookDao.getById(id);
+        return bookRepository.findById(id);
     }
 
     @Override
     public Optional<Author> getAuthorById(long id) {
-        return authorDao.getById(id);
+        return authorRepository.findById(id);
     }
 
     @Override
     public Optional<Genre> getGenreById(long id) {
-        return genreDao.getById(id);
+        return genreRepository.findById(id);
     }
 
     @Override
     public Author getAuthorByFullName(String name, String surname) {
-        return authorDao.getByFullName(name, surname);
+        return authorRepository.getByNameAndSurname(name, surname);
     }
 
     @Override
     public Genre getGenreByGenre(String genre) {
-        return genreDao.getByGenre(genre);
+        return genreRepository.getByGenre(genre);
     }
 
     @Override
     public void addBook(Book book) {
-        bookDao.insert(book);
+        bookRepository.save(book);
     }
 
     @Override
     public void addAuthor(Author author) {
-        authorDao.insert(author);
+        authorRepository.save(author);
     }
 
     @Override
     public void addGenre(Genre genre) {
-        genreDao.insert(genre);
+        genreRepository.save(genre);
     }
 
     @Override
     public void addComment(Comment comment) {
-        commentDao.insert(comment);
+        commentRepository.save(comment);
     }
     @Override
     public void deleteBook(long id) {
-        bookDao.deleteById(id);
+        bookRepository.deleteById(id);
     }
 
     @Override
     public void deleteAuthor(long id) {
-        authorDao.deleteById(id);
+        authorRepository.deleteById(id);
     }
 
     @Override
     public void deleteGenre(long id) {
-        genreDao.deleteById(id);
+        genreRepository.deleteById(id);
     }
-
-
 }

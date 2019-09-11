@@ -5,7 +5,7 @@ import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
 import org.springframework.stereotype.Repository;
 import ru.otus.homework07.domain.Genre;
-import ru.otus.homework07.domain.partial.BookTitle;
+import ru.otus.homework07.domain.partial.PartialBook;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -78,8 +78,8 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public BookTitle getBookTitleByTitle(String title) {
-        return em.createQuery("select bt from BookTitle bt where title = :title", BookTitle.class).
+    public PartialBook getPartialBookByTitle(String title) {
+        return em.createQuery("select pb from PartialBook pb where title = :title", PartialBook.class).
                 setParameter("title", title).
                 getSingleResult();
     }

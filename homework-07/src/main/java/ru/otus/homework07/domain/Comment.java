@@ -1,14 +1,14 @@
 package ru.otus.homework07.domain;
 
 import lombok.*;
-import ru.otus.homework07.domain.partial.BookTitle;
+import ru.otus.homework07.domain.partial.PartialBook;
 
 import javax.persistence.*;
 
 @NamedEntityGraph(
         name = "comments-entity-graph",
         attributeNodes = {
-                @NamedAttributeNode("bookTitle"),
+                @NamedAttributeNode("partialBook"),
         }
 )
 @Entity
@@ -26,8 +26,8 @@ public class Comment {
     private String comment;
     
     @Getter @Setter
-    @ManyToOne(targetEntity = BookTitle.class)
+    @ManyToOne(targetEntity = PartialBook.class)
     @JoinColumn(name = "book_id")
-    private BookTitle bookTitle;
+    private PartialBook partialBook;
 
 }

@@ -3,7 +3,7 @@ package ru.otus.homework07.dao;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.otus.homework07.domain.Comment;
-import ru.otus.homework07.domain.partial.BookTitle;
+import ru.otus.homework07.domain.partial.PartialBook;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -27,9 +27,9 @@ public class CommentDaoJpa implements CommentDao {
     }
 
     @Override
-    public List<Comment> getByBookTitle(BookTitle bookTitle) {
+    public List<Comment> getByBookTitle(PartialBook partialBook) {
         return em.createQuery("select c from Comment c where book_id = :bookId", Comment.class).
-                setParameter("bookId", bookTitle.getId()).
+                setParameter("bookId", partialBook.getId()).
                 setHint("javax.persistence.fetchgraph", getEntityGraph()).
                 getResultList();
     }

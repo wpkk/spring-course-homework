@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "books")
 @AllArgsConstructor @NoArgsConstructor
 @ToString
-public class BookTitle {
+public class PartialBook {
 
     @Getter @Setter
     @Id
