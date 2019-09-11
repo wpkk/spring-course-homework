@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  messages:
+    basename: i18n/bundle
+    encoding: UTF-8
+  liquibase:
+    enabled: true
+

@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2019-08-23--0002--books
+      author: wpkk
+      createTable:
+        tableName: books
+        columns:
+          - column:
+              name: id
+              type: int
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+                primaryKeyName: pk_books
+          - column:
+              name: title
+              type: varchar(255)
+          - column:
+              name: author_id
+              type: int
+              constraints:
+                nullable: false
+                foreignKeyName: fk_books_authors
+                references: authors(id)
+                deleteCascade: true
+          - column:
+              name: genre_id
+              type: int
+              constraints:
+                nullable: false
+                foreignKeyName: fk_books_genres
+                references: genres(id)
+                deleteCascade: true
+      addAutoIncrement:
+        tableName: books
+        columnName: id
+        columnDataType: int
+        incrementBy: 1
+        startWith: 1
