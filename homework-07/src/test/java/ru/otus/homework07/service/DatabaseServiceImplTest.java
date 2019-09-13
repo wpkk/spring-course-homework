@@ -22,6 +22,10 @@ import static org.mockito.Mockito.*;
 @DisplayName("Class DatabaseServiceImpl")
 class DatabaseServiceImplTest {
 
+    private static final String AUTHOR_SURNAME = "author1";
+    private static final int EXPECTED_NUMBER_OF_BOOKS = 2;
+    private static final long AUTHOR_ID = 1L;
+
     @Autowired
     private DatabaseService databaseService;
 
@@ -37,10 +41,6 @@ class DatabaseServiceImplTest {
     @Mock
     private Book book;
 
-    private static final String AUTHOR_SURNAME = "author1";
-    private static final int EXPECTED_NUMBER_OF_BOOKS = 2;
-    private static final long AUTHOR_ID = 1L;
-
     @Test
     @DisplayName("Should return books by specific author")
     void shouldReturnBooksBySpecificAuthor() {
@@ -53,5 +53,4 @@ class DatabaseServiceImplTest {
         assertThat(books).hasSize(EXPECTED_NUMBER_OF_BOOKS).allMatch(b -> b.getAuthor().getId() == AUTHOR_ID);
 
     }
-
 }
