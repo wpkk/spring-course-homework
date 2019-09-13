@@ -18,7 +18,7 @@ import java.time.Year;
 @DisplayName("Author repository")
 class AuthorRepositoryTest {
 
-    private final static long BOOK_ID = 2L;
+    private final static long AUTHOR_ID = 1L;
     private static final long DEFAULT_AUTHOR_ID = 0L;
     private static final String EXPECTED_NAME = "name1";
     private final static Year YEAR_BIRTH = Year.of(1970);
@@ -34,10 +34,14 @@ class AuthorRepositoryTest {
     @Mock
     Book book;
 
+    @Mock
+    Author author;
+
     @Test
     @DisplayName("Should return author by specific book")
     void shouldReturnAuthorBySpecificBook() {
-        Mockito.when(book.getId()).thenReturn(BOOK_ID);
+        Mockito.when(book.getAuthor()).thenReturn(author);
+        Mockito.when(author.getId()).thenReturn(AUTHOR_ID);
         Author author = authorRepository.getByBook(book);
         assertThat(author.getName()).isEqualTo(EXPECTED_NAME);
     }

@@ -10,6 +10,6 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
 
     Genre getByGenre(String genre);
 
-    @Query("select g from Genre g where id = :#{#book?.getId()}")
+    @Query("select g from Genre g where id = :#{#book?.getGenre().getId()}")
     Genre getByBook(@Param("book") Book book);
 }
