@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import ru.otus.homework07.dao.*;
 import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
+import ru.otus.homework07.repository.AuthorRepository;
+import ru.otus.homework07.repository.BookRepository;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @DataJpaTest
-@Import({DatabaseServiceImpl.class, BookDaoJpa.class, AuthorDaoJpa.class, GenreDaoJpa.class, CommentDaoJpa.class})
+@Import({DatabaseServiceImpl.class})
 @DisplayName("Class DatabaseServiceImpl")
 class DatabaseServiceImplTest {
 
@@ -25,10 +26,10 @@ class DatabaseServiceImplTest {
     private DatabaseService databaseService;
 
     @MockBean
-    private BookDao bookDao;
+    private BookRepository bookRepository;
 
     @MockBean
-    private AuthorDao authorDao;
+    private AuthorRepository authorRepository;
 
     @Mock
     private Author author;
@@ -45,8 +46,8 @@ class DatabaseServiceImplTest {
     void shouldReturnBooksBySpecificAuthor() {
         when(book.getAuthor()).thenReturn(author);
         when(author.getId()).thenReturn(AUTHOR_ID);
-        when(authorDao.getBySurname(AUTHOR_SURNAME)).thenReturn(author);
-        when(bookDao.getByAuthor(any(Author.class))).thenReturn(List.of(book, book));
+        when(authorRepository.getBySurname(AUTHOR_SURNAME)).thenReturn(author);
+        when(bookRepository.getByAuthor(any(Author.class))).thenReturn(List.of(book, book));
 
         List<Book> books = databaseService.getBooksByAuthor(AUTHOR_SURNAME);
         assertThat(books).hasSize(EXPECTED_NUMBER_OF_BOOKS).allMatch(b -> b.getAuthor().getId() == AUTHOR_ID);

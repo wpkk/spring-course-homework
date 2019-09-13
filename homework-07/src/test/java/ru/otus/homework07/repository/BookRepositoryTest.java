@@ -1,4 +1,4 @@
-package ru.otus.homework07.dao;
+package ru.otus.homework07.repository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
 import ru.otus.homework07.domain.Genre;
@@ -20,9 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @DataJpaTest
-@Import({BookDaoJpa.class, AuthorDaoJpa.class, GenreDaoJpa.class})
-@DisplayName("Class BookDaoJdbc")
-class BookDaoJpaTest {
+@DisplayName("Class BookRepository")
+class BookRepositoryTest {
 
     private final static long BOOK_ID = 2L;
     private final static long DEFAULT_BOOK_ID = 0L;
@@ -35,7 +33,7 @@ class BookDaoJpaTest {
     private final static String TEST_BOOK_TITLE = "testTitle";
 
     @Autowired
-    private BookDao bookDao;
+    private BookRepository bookRepository;
 
     @Autowired
     private TestEntityManager em;
@@ -49,13 +47,13 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should return correct number of books")
     void shouldReturnCorrectNumberOfBooks() {
-        assertEquals(BOOK_COUNT, bookDao.count());
+        assertEquals(BOOK_COUNT, bookRepository.count());
     }
 
     @Test
     @DisplayName("Should get correct book by id")
     void shouldGetCorrectBookById() {
-        Optional<Book> actualBook = bookDao.getById(BOOK_ID);
+        Optional<Book> actualBook = bookRepository.findById(BOOK_ID);
         Book expectedBook = em.find(Book.class, BOOK_ID);
         assertThat(actualBook).isPresent().get().isEqualToComparingFieldByField(expectedBook);
     }
@@ -63,15 +61,15 @@ class BookDaoJpaTest {
     @Test
     @DisplayName("Should return all the books")
     void shouldReturnAllTheBooks() {
-        List<Book> books = bookDao.getAll();
+        List<Book> books = bookRepository.findAll();
         assertThat(books).hasSize(BOOK_COUNT);
     }
 
     @Test
     @DisplayName("Should return books by specific author")
     void shouldReturnBooksBySpecificAuthor() {
-        when(author.getId()).thenReturn(AUTHOR_ID);
-        List<Book> books = bookDao.getByAuthor(author);
+        Author author = new Author(AUTHOR_ID, TEST_AUTHOR_NAME, TEST_AUTHOR_NAME, YEAR_BIRTH, YEAR_DEATH);
+        List<Book> books = bookRepository.getByAuthor(author);
         assertThat(books).hasSize(BOOKS_FOR_AUTHOR_ONE).allMatch(b -> b.getAuthor().getId() == AUTHOR_ID &&
                 b.getAuthor().getBirth().equals(YEAR_BIRTH) &&
                 b.getAuthor().getDeath().equals(YEAR_DEATH));
@@ -82,7 +80,7 @@ class BookDaoJpaTest {
     void shouldCorrectlyPersistBooks() {
 
         Book book = new Book(DEFAULT_BOOK_ID, TEST_BOOK_TITLE, author, genre);
-        bookDao.insert(book);
+        bookRepository.save(book);
         assertThat(book.getId()).isGreaterThan(DEFAULT_BOOK_ID);
 
         when(author.getName()).thenReturn(TEST_AUTHOR_NAME);

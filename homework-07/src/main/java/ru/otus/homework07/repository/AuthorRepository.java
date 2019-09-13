@@ -14,6 +14,4 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Query("select a from Author a where id = :#{#book?.getId()}")
     Author getByBook(@Param("book") Book book);
-
-//    Author findById();
 }

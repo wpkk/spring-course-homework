@@ -1,4 +1,4 @@
-package ru.otus.homework07.dao.converters;
+package ru.otus.homework07.domain.converters;
 
 import javax.persistence.AttributeConverter;
 import java.time.Year;

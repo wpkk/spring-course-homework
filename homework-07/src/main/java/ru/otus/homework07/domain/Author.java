@@ -1,7 +1,7 @@
 package ru.otus.homework07.domain;
 
 import lombok.*;
-import ru.otus.homework07.dao.converters.YearAttributeConverter;
+import ru.otus.homework07.domain.converters.YearAttributeConverter;
 
 import javax.persistence.*;
 import java.time.Year;
