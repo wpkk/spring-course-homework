@@ -32,9 +32,9 @@ databaseChangeLog:
                 foreignKeyName: fk_books_genres
                 references: genres(id)
                 deleteCascade: true
-      addAutoIncrement:
-        tableName: books
-        columnName: id
-        columnDataType: int
-        incrementBy: 1
-        startWith: 1
+#      addAutoIncrement:
+#        tableName: books
+#        columnName: id
+#        columnDataType: int
+#        incrementBy: 1
+#        startWith: 1
