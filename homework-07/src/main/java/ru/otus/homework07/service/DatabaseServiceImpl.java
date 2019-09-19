@@ -1,6 +1,7 @@
 package ru.otus.homework07.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.otus.homework07.domain.Author;
 import ru.otus.homework07.domain.Book;
@@ -32,18 +33,18 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Book getBookByTitle(String title) {
-        return bookRepository.getByTitle(title);
+        return bookRepository.getByTitle(title).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
     public List<Book> getBooksByAuthor(String surname) {
-        Author author = authorRepository.getBySurname(surname);
+        Author author = authorRepository.getBySurname(surname).orElseThrow(() -> new EmptyResultDataAccessException(1));
         return bookRepository.getByAuthor(author);
     }
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
-        Genre genreObject = genreRepository.getByGenre(genre);
+        Genre genreObject = genreRepository.getByGenre(genre).orElseThrow(() -> new EmptyResultDataAccessException(1));
         return bookRepository.getByGenre(genreObject);
     }
 
@@ -54,8 +55,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Author getAuthorByBook(String bookTitle) {
-        Book book = bookRepository.getByTitle(bookTitle);
-        return authorRepository.getByBook(book);
+        Book book = bookRepository.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        return authorRepository.getByBook(book).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
@@ -65,8 +66,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Genre getGenreByBook(String bookTitle) {
-        Book book = bookRepository.getByTitle(bookTitle);
-        return genreRepository.getByBook(book);
+        Book book = bookRepository.getByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
+        return genreRepository.getByBook(book).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
@@ -76,13 +77,13 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public List<Comment> getCommentByBook(String bookTitle) {
-        PartialBook partialBookObject = partialBookRepository.getPartialBookByTitle(bookTitle);
+        PartialBook partialBookObject = partialBookRepository.getPartialBookByTitle(bookTitle).orElseThrow(() -> new EmptyResultDataAccessException(1));
         return commentRepository.getByPartialBook(partialBookObject);
     }
 
     @Override
     public PartialBook getPartialBookByTitle(String title) {
-        return partialBookRepository.getPartialBookByTitle(title);
+        return partialBookRepository.getPartialBookByTitle(title).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
@@ -117,12 +118,12 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public Author getAuthorByFullName(String name, String surname) {
-        return authorRepository.getByNameAndSurname(name, surname);
+        return authorRepository.getByNameAndSurname(name, surname).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override
     public Genre getGenreByGenre(String genre) {
-        return genreRepository.getByGenre(genre);
+        return genreRepository.getByGenre(genre).orElseThrow(() -> new EmptyResultDataAccessException(1));
     }
 
     @Override

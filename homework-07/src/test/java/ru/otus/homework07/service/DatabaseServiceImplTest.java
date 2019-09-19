@@ -13,6 +13,7 @@ import ru.otus.homework07.repository.AuthorRepository;
 import ru.otus.homework07.repository.BookRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -46,7 +47,7 @@ class DatabaseServiceImplTest {
     void shouldReturnBooksBySpecificAuthor() {
         when(book.getAuthor()).thenReturn(author);
         when(author.getId()).thenReturn(AUTHOR_ID);
-        when(authorRepository.getBySurname(AUTHOR_SURNAME)).thenReturn(author);
+        when(authorRepository.getBySurname(AUTHOR_SURNAME)).thenReturn(Optional.of(author));
         when(bookRepository.getByAuthor(any(Author.class))).thenReturn(List.of(book, book));
 
         List<Book> books = databaseService.getBooksByAuthor(AUTHOR_SURNAME);

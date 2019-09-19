@@ -6,10 +6,12 @@ import org.springframework.data.repository.query.Param;
 import ru.otus.homework07.domain.Book;
 import ru.otus.homework07.domain.Genre;
 
+import java.util.Optional;
+
 public interface GenreRepository extends JpaRepository<Genre, Long> {
 
-    Genre getByGenre(String genre);
+    Optional<Genre> getByGenre(String genre);
 
     @Query("select g from Genre g where id = :#{#book?.getGenre().getId()}")
-    Genre getByBook(@Param("book") Book book);
+    Optional<Genre> getByBook(@Param("book") Book book);
 }

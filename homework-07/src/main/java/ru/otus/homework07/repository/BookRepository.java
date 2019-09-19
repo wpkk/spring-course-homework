@@ -7,6 +7,7 @@ import ru.otus.homework07.domain.Book;
 import ru.otus.homework07.domain.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
@@ -15,7 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAll();
 
     @EntityGraph("books-entity-graph")
-    Book getByTitle(String title);
+    Optional<Book> getByTitle(String title);
 
     @EntityGraph("books-entity-graph")
     List<Book> getByAuthor(Author author);

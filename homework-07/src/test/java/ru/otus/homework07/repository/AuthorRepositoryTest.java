@@ -42,7 +42,7 @@ class AuthorRepositoryTest {
     void shouldReturnAuthorBySpecificBook() {
         Mockito.when(book.getAuthor()).thenReturn(author);
         Mockito.when(author.getId()).thenReturn(AUTHOR_ID);
-        Author author = authorRepository.getByBook(book);
+        Author author = authorRepository.getByBook(book).orElseThrow();
         assertThat(author.getName()).isEqualTo(EXPECTED_NAME);
     }
 
