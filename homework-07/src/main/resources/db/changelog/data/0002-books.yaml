@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001-books-test-data
+      author: wpkk
+      context: test
+      runOnChange: true
+      loadUpdateData:
+        primaryKey: id
+        file: data/books.csv
+        relativeToChangelogFile: true
+        separator: ','
+        quotChar: '"'
+        encoding: UTF-8
+        tableName: books
